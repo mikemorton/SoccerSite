@@ -42,12 +42,24 @@ table {
 	border-spacing: 0;
 }
 
+html { height: 100% }
+body { height: 100%; max-height: 100%; margin: 0; padding: 0; border: 0;
+font-family: verdana,arial,sans-serif; font-size:14px;}
 
+.left { float: left; width: 230px; height: 100%; margin: 5px; }
+.right { float: left; display: inline-block; height: 100%}
+.bottom { position:absolute; bottom: 0; width: 200px; }
+
+#tweet { float: left; width: 50%; }
+#facebook { float: right; width: 50%; }
+#adholder { width: 200px; margin: 0px auto }
+
+h1 {font-size: 25px; }
 
 .group, .tree {width: 400px; margin:4px;}
 .group table {width: 100%}
-.group .match {width: 100%}
-.group .match span {width: 40% }
+.group .match {width: 100%;}
+.group .match span {width: 175px; display:inline-block; text-align: right; }
 
 
 .qf, .sf, .final, .champ {float:left; width: 100px}
