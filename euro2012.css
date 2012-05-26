@@ -42,9 +42,11 @@ table {
 	border-spacing: 0;
 }
 
+
+
 html { height: 100% }
 body { height: 100%; max-height: 100%; margin: 0; padding: 0; border: 0;
-font-family: verdana,arial,sans-serif; font-size:14px;}
+font-family: verdana,arial,sans-serif; font-size:14px; background-color: #ddddcc; }
 
 .left { float: left; width: 230px; height: 100%; margin: 5px; }
 .right { float: left; display: inline-block; height: 100%}
@@ -55,15 +57,47 @@ font-family: verdana,arial,sans-serif; font-size:14px;}
 #adholder { width: 200px; margin: 0px auto }
 
 h1 {font-size: 25px; }
+h2 {font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px;}
 
-.group, .tree {width: 400px; margin:4px;}
-.group table {width: 100%}
+.group, .tree {width: 445px; margin:4px; padding: 4px; border: 1px solid #bbbbaa; background-color: #ffffff;}
+
+.group table {width: 100%; border: 1px solid #bbbbaa; margin-bottom:4px;}
+.group table th {
+    padding: 2px 2px 2px 2px;
+    border:0px;
+    border-left: #bbbbaa 1px solid;
+    border-right: #bbbbaa 1px solid;
+    border-bottom: #bbbbaa 1px solid;
+    font-weight: bold;
+}
+.group table td {
+    padding: 2px 2px 2px 2px;
+    border:0px;
+    border-left: #bbbbaa 1px solid;
+    border-right: #bbbbaa 1px solid;
+    text-align: center;
+}
+
+.group table .teamname {
+    text-align: left;
+}
+
 .group .match {width: 100%;}
 .group .match span {width: 175px; display:inline-block; text-align: right; }
 
+.tree {display:inline-block;margin-top:0;}
+.qf,.sf, .final {width: 145px;float:left;margin-right:4px;}
+.qf div, .sf div, .final div, .champ div {
+    margin: 6px 0 6px 0; 
+    display:inline-block; 
+    border: 1px solid #bbbbaa; 
+    width: 95%;
+    padding: 2px;
+}
+.qf span, .sf span, .final span {
+    cursor: pointer;
+}
 
-.qf, .sf, .final, .champ {float:left; width: 100px}
-.qf div {margin: 4px 0 4px 0;}
-.sf div {margin: 4px 0 4px 0;}
-.final div {margin: 4px 0 4px 0;}
-.champ {margin: 4px 0 4px 0;}
+.final{
+    margin-right: 0
+}

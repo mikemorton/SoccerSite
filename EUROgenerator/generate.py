@@ -133,7 +133,9 @@ for key in keys:
     teams.extend(groupmatches[key][1])
 
     print """
-      <div class="group" id="%s">""" % (key.replace(" ", "_"))
+      <div class="group" id="%s">
+         <h2>%s</h2>
+""" % (key.replace(" ", "_"), key)
     OutputTable(teams)
     for match in groupmatches[key]:
         OutputMatch(match[0], match[1])
@@ -146,6 +148,7 @@ for key in keys:
 
 print"""
 <div class="tree">
+<h2>Knockout Phase</h2>
 <div class="qf">
   <div>
     <span rel="Group_A" class="first"></span><br />
@@ -167,25 +170,22 @@ print"""
 
 <div class="sf">
   <div>
-    <span></span><br />
-    <span></span>
+    <span>&nbsp;</span><br />
+    <span>&nbsp;</span>
   </div>
   <div>
-    <span></span><br />
-    <span></span>
+    <span>&nbsp;</span><br />
+    <span>&nbsp;</span>
   </div>
 </div>
 
 <div class="final">
   <div>
-    <span></span><br />
-    <span></span>
+    <span>&nbsp;</span><br />
+    <span>&nbsp;</span>
   </div>
 </div>
 
-<div class="champ">
-  <span></span>
-</div>
 </div>
 
 </div>

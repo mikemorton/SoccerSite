@@ -35,8 +35,6 @@ $(document).ready(function() {
       var $elem = $(this);
       if($elem.html().length == 0)
 	return;
-
-      $('.champ span').html($elem.html());
     });  
 });
 
