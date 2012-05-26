@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">  
+
+<head>
+	<title>2010 World Cup Results Calculator</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="description" content="Quickly calculate the results of the 2010 World Cup Group Stage and Knock-out Stage." />
+    <meta name="keywords" content="World Cup Calculator, World Cup Results Calculator, World Cup Group Stage Calculator, World Cup Tree, 2010 World Cup, World Cup, Cup Calculator" /> 
+    <meta name="google-site-verification" content="RmO7AhigTPyQPH0l3WALbY8uNPAx6zso5jl3qUtrWpw" />
+    <script language="Javascript" src="jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script language="Javascript" src="jquery.qtip-1.0.0-rc3-min.js" type="text/javascript"></script>
+    <script language="Javascript" src="soccer.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="soccer.css" type="text/css" />
+    <script language="Javascript" type="text/javascript">
+      var dt = new Object();
+    </script>
+</head>
+
+<body onload="AddHandlers();UpdateAllGroups();">
+
+<div class="left">
+  <div class="navbar">
+    <a href="#groupa">Group A</a><br/>
+    <a href="#groupb">Group B</a><br/>
+    <a href="#groupc">Group C</a><br/>
+    <a href="#groupd">Group D</a><br/>
+    <a href="#groupe">Group E</a><br/>
+    <a href="#groupf">Group F</a><br/>
+    <a href="#groupg">Group G</a><br/>
+    <a href="#grouph">Group H</a><br/>
+    <a href="#knockoutstage">Knock-Out Stage</a>
+  </div>
+</div>
+<div class="wrapper">
+
+<div class="group">
+  <h1 class="groupheader">2010 World Cup Results Calculator</h1>
+
+  <div>
+  <div class="mtmb">
+    Quickly figure out what it will take for your team to advance to the next round.<br/><br/>
+    Enter some scores below and the standings will automatically update according to the <a href="#" onclick="$('#tiebreak').slideToggle('fast');">Official World Cup Tie-Breaking Procedures</a>.
+  </div>
+  <div id="tiebreak" style="display:none">
+    Teams are ranked according to the following criteria:
+    <ol>
+      <li>Points</li>
+      <li>Goal Differential</li>
+      <li>Goals Scored</li>
+      <li>Points in matches between tied teams</li>
+      <li>Goal Differential in matches between tied teams</li>
+      <li>Goals Scored in matches between tied teams</li>
+      <li>Drawing of lots organized by the FIFA Organizing Committee</li>
+    </ol>
+  </div>
+  <div class="mtmb">
+    The top two teams in each group advance to the next round.  Scroll to the bottom to play with <a href="#knockoutstage">Knock-Out Stage</a> scenarios.<br/><br/>
+    Feedback and Announcements: <a href="http://twitter.com/cupcalculator">@cupcalculator</a><br />
+  </div>
+  </div>
+</div>
+
+<!-- INSERT GENERATED GROUPS HERE -->
+
+
+
+
+</div>
+
+<div class="rightbar">
+
+
+</div>
+
+
+
+<div>
+	<div class="kostage">
+		<a name="knockoutstage"></a>
+		<h1 class="groupheader">
+			Knock-Out Stage
+		</h1>
+		<div id="knockoutgroup">
+			<div>
+				This section will update as you enter results above. Click on a team to advance them to the next round.
+			</div>
+			<div class="koround r16">
+				<div class="komatch">
+					<div id="groupAw" onclick="RemoveById('groupBr','qf');TreeClick(this, 'qf1h');">
+					</div>
+					<div id="groupBr" onclick="RemoveById('groupAw','qf');TreeClick(this, 'qf1h');">
+					</div>
+				</div>
+				<div class="komatch">
+					<div id="groupCw" onclick="RemoveById('groupDr','qf');TreeClick(this, 'qf1v');">
+					</div>
+					<div id="groupDr" onclick="RemoveById('groupCw','qf');TreeClick(this, 'qf1v');">
+					</div>
+				</div>
+				<div class="komatch">
+					<div id="groupEw" onclick="RemoveById('groupFr','qf');TreeClick(this, 'qf2h');">
+					</div>
+					<div id="groupFr" onclick="RemoveById('groupEw','qf');TreeClick(this, 'qf2h');">
+					</div>
+				</div>
+				<div class="komatch">
+					<div id="groupGw" onclick="RemoveById('groupHr','qf');TreeClick(this, 'qf2v');">
+					</div>
+					<div id="groupHr" onclick="RemoveById('groupGw','qf');TreeClick(this, 'qf2v');">
+					</div>
+				</div>
+				<div class="komatch">
+					<div id="groupBw" onclick="RemoveById('groupAr','qf');TreeClick(this, 'qf3h');">
+					</div>
+					<div id="groupAr" onclick="RemoveById('groupBw','qf');TreeClick(this, 'qf3h');">
+					</div>
+				</div>
+				<div class="komatch">
+					<div id="groupDw" onclick="RemoveById('groupCr','qf');TreeClick(this, 'qf3v');">
+					</div>
+					<div id="groupCr" onclick="RemoveById('groupDw','qf');TreeClick(this, 'qf3v');">
+					</div>
+				</div>
+				<div class="komatch">
+					<div id="groupFw" onclick="RemoveById('groupEr','qf');TreeClick(this, 'qf4h');">
+					</div>
+					<div id="groupEr" onclick="RemoveById('groupFw','qf');TreeClick(this, 'qf4h');">
+					</div>
+				</div>
+				<div class="komatch">
+					<div id="groupHw" onclick="RemoveById('groupGr','qf');TreeClick(this, 'qf4v');">
+					</div>
+					<div id="groupGr" onclick="RemoveById('groupHw','qf');TreeClick(this, 'qf4v');">
+					</div>
+				</div>
+			</div>
+			<div class="koround qf">
+				<div class="komatch">
+					<div id="qf1h" onclick="RemoveById('qf1v','sf');TreeClick(this, 'sf1h');">
+					</div>
+					<div id="qf1v" onclick="RemoveById('qf1h','sf');TreeClick(this, 'sf1h');">
+					</div>
+				</div>
+				<div class="komatch">
+					<div id="qf2h" onclick="RemoveById('qf2v','sf');TreeClick(this, 'sf1v');">
+					</div>
+					<div id="qf2v" onclick="RemoveById('qf2h','sf');TreeClick(this, 'sf1v');">
+					</div>
+				</div>
+				<div class="komatch">
+					<div id="qf3h" onclick="RemoveById('qf3v','sf');TreeClick(this, 'sf2h');">
+					</div>
+					<div id="qf3v" onclick="RemoveById('qf3h','sf');TreeClick(this, 'sf2h');">
+					</div>
+				</div>
+				<div class="komatch" style="margin-bottom:0px;">
+					<div id="qf4h" onclick="RemoveById('qf4v','sf');TreeClick(this, 'sf2v');">
+					</div>
+					<div id="qf4v" onclick="RemoveById('qf4h','sf');TreeClick(this, 'sf2v');">
+					</div>
+				</div>
+			</div>
+			<div class="koround sf">
+				<div class="komatch" style="margin-top:90px;">
+					<div id="sf1h" onclick="RemoveById('sf1h','f');RemoveById('sf1v','f');EndClick('sf1h','fh', 'sf1v', 'thirdph');">
+					</div>
+					<div id="sf1v" onclick="RemoveById('sf1h','f');RemoveById('sf1v','f');EndClick('sf1v','fh', 'sf1h', 'thirdph');">
+					</div>
+				</div>
+				<div class="komatch" style="margin-top:180px;">
+					<div id="sf2h" onclick="RemoveById('sf2h','f');RemoveById('sf2v','f');EndClick('sf2h','fv', 'sf2v', 'thirdpv');">
+					</div>
+					<div id="sf2v" onclick="RemoveById('sf2h','f');RemoveById('sf2v','f');EndClick('sf2v','fv', 'sf2h', 'thirdpv');">
+					</div>
+				</div>
+			</div>
+			<div class="koround f" style="margin-top:200px;">
+				<div class="komatch">
+					<div id="fh" onclick="EndClick('fh','first', 'fv', 'second');">
+					</div>
+					<div id="fv" onclick="EndClick('fv','first', 'fh', 'second');">
+					</div>
+				</div>
+				<div class="komatch" style="margin-top:130px;">
+					<div id="thirdph" onclick="EndClick('thirdph','third', 'thirdpv', 'fourth');">
+					</div>
+					<div id="thirdpv" onclick="EndClick('thirdpv','third', 'thirdph', 'fourth');">
+					</div>
+				</div>
+			</div>
+			<div class="koround" style="margin-top:180px;margin-right:0px;">
+				<div class="finalfour">
+					<div>
+						1. <span id="first"></span>
+					</div>
+					<div>
+						2. <span id="second"></span>
+					</div>
+					<div>
+						3. <span id="third"></span>
+					</div>
+					<div>
+						4. <span id="fourth"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+  
+</div>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16735325-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>
