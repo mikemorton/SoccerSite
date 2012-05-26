@@ -83,7 +83,7 @@ h2 {font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px;}
 }
 
 .group .match {width: 100%;}
-.group .match span {width: 175px; display:inline-block; text-align: right; }
+.group .match span {width: 200px; display:inline-block; text-align: right; }
 
 .tree {display:inline-block;margin-top:0;}
 .qf,.sf, .final {width: 145px;float:left;margin-right:4px;}
