@@ -50,8 +50,9 @@ font-family: verdana,arial,sans-serif; font-size:14px; background-color: #ddddcc
 
 .left { float: left; width: 230px; height: 100%; margin: 5px; }
 .right { float: left; display: inline-block; height: 100%}
-.bottom { position:absolute; bottom: 0; width: 200px; }
+.bottom { position:absolute; bottom: 0; width: 230px; }
 
+#summary {margin: 4px 0 4px 0; }
 #tweet { float: left; width: 50%; }
 #facebook { float: right; width: 50%; }
 #adholder { width: 200px; margin: 0px auto }
@@ -86,7 +87,9 @@ h2 {font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px;}
 .group .match span {width: 200px; display:inline-block; text-align: right; }
 
 .tree {display:inline-block;margin-top:0;}
-.qf,.sf, .final {width: 145px;float:left;margin-right:4px;}
+.qf,.sf,.final {width: 145px;float:left;margin-right:4px;}
+.sf{margin-top:46px;}
+.final{margin-top:69px;}
 .qf div, .sf div, .final div, .champ div {
     margin: 6px 0 6px 0; 
     display:inline-block; 

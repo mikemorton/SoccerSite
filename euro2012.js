@@ -168,6 +168,9 @@ function UpdateGroup(sGroupID) {
       BreakTwoWay(aIds, 0, 1);
   }
 
+  $('.sf div span').html('&nbsp;');
+  $('.final div span').html('&nbsp;');
+
   // Update Tree
   $('.first[rel="' + sGroupID + '"]').html($('#' + sGroupID + ' .teamname:eq(0)').html());
   $('.second[rel="' + sGroupID + '"]').html($('#' + sGroupID + ' .teamname:eq(1)').html());
