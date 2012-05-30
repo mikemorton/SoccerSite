@@ -1,6 +1,6 @@
 var dt = {};
 $(document).ready(function() {
-  $(".match input").change(function() {
+  $(".match input").blur(function() {
 	UpdateGroup($(this).closest('.group').attr('id'));
     })
     .keyup(function () { 
@@ -18,6 +18,9 @@ $(document).ready(function() {
 
       var index = $('.qf div').index($elem.parent());
 
+      
+      $('.final div span').html('&nbsp;');
+      $('.trophy').hide();
       $('.sf span').eq(index).html($elem.html());
     });
 
@@ -29,12 +32,16 @@ $(document).ready(function() {
       var index = $('.sf div').index($elem.parent());
 
       $('.final span').eq(index).html($elem.html());
+      $('.trophy').hide();
     });  
 
   $('.final span').click(function () {
       var $elem = $(this);
       if($elem.html().length == 0)
 	return;
+
+      $('.trophy').hide();
+      $elem.prev('.trophy').show();
     });  
 });
 
@@ -170,6 +177,7 @@ function UpdateGroup(sGroupID) {
 
   $('.sf div span').html('&nbsp;');
   $('.final div span').html('&nbsp;');
+  $('.trophy').hide();
 
   // Update Tree
   $('.first[rel="' + sGroupID + '"]').html($('#' + sGroupID + ' .teamname:eq(0)').html());

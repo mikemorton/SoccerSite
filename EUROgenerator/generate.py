@@ -192,8 +192,8 @@ print"""
 
 <div class="final">
   <div>
-    <span>&nbsp;</span><br />
-    <span>&nbsp;</span>
+    <img src="images/trophy.gif" alt="Trophy" class="trophy" /><span>&nbsp;</span><br />
+    <img src="images/trophy.gif" alt="Trophy" class="trophy" /><span>&nbsp;</span>
   </div>
 </div>
 
