@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import urllib2
 from BeautifulSoup import BeautifulSoup
 
@@ -44,15 +46,22 @@ def OutputTeamRow(team):
 """ % (team.replace(" ", "_"), team.replace(" ", "_"), team, team)
 
 
-def OutputMatch(team1, team2):
+def OutputMatch(team1, team2, score):
+    parts = score.split(u'–')
+    if len(parts) > 1:
+        s1 = parts[0]
+        s2 = parts[1]
+    else:
+        s1, s2 = '', ''
+    
     print """
         <div class="match">
           <span rel="%s"><img src="images/%s.png" alt="%s" />
-          %s <input size="2" maxlength="2" type="text" /></span> vs. <span rel=
-          "%s"><img src="images/%s.png" alt="%s" /> %s <input size="2" maxlength="2" type="text" /></span>
+          %s <input size="2" maxlength="2" type="text" value="%s" /></span> vs. <span rel=
+          "%s"><img src="images/%s.png" alt="%s" /> %s <input size="2" maxlength="2" type="text" value="%s" /></span>
         </div>
-""" % ( team1.replace(" ", "_"), team1.replace(" ", "_"), team1, team1,
-        team2.replace(" ", "_"), team2.replace(" ", "_"), team2, team2)
+""" % ( team1.replace(" ", "_"), team1.replace(" ", "_"), team1, team1, s1,
+        team2.replace(" ", "_"), team2.replace(" ", "_"), team2, team2, s2)
 
 
 opener = urllib2.build_opener()
@@ -75,10 +84,10 @@ for tr in table.findAll('tr')[1:27]:
         if curgroup not in groupmatches:
             groupmatches[curgroup] = list()
 
-        groupmatches[curgroup].append((cells[4].text, cells[6].text))
+        groupmatches[curgroup].append((cells[4].text, cells[6].text, cells[5].text))
 
     elif len(cells) == 6:
-        groupmatches[curgroup].append((cells[3].text, cells[5].text))
+        groupmatches[curgroup].append((cells[3].text, cells[5].text, cells[4].text))
 
 keys = groupmatches.keys()
 keys.sort()
@@ -140,8 +149,8 @@ Feedback: <a href="http://www.twitter.com/theycallmemorty">@theycallmemorty</a>
 """
 for key in keys:
     teams = list()
-    teams.extend(groupmatches[key][0])
-    teams.extend(groupmatches[key][1])
+    teams.extend(groupmatches[key][0][:2])
+    teams.extend(groupmatches[key][1][:2])
 
     print """
       <div class="group" id="%s">
@@ -149,7 +158,7 @@ for key in keys:
 """ % (key.replace(" ", "_"), key)
     OutputTable(teams)
     for match in groupmatches[key]:
-        OutputMatch(match[0], match[1])
+        OutputMatch(match[0], match[1], match[2])
 
     print """
       </div>"""
