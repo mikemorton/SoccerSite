@@ -127,7 +127,7 @@ function UpdateGroup(sGroupID) {
     var iStart = i;
     var j;
     for(j=i-1; j >=0; j--){
-      if(TeamCompare(aIds[iStart], aIds[j]) > 0) {
+      if(dt[aIds[iStart]][7] > dt[aIds[j]][7]) {
 	
 	$("#" + aIds[iStart]).insertBefore($('#' + aIds[j]));
 	
@@ -149,7 +149,7 @@ function UpdateGroup(sGroupID) {
 
   // Get tied teams
   for(i=3; i>=1; i--){
-    if(TeamCompare(aIds[i], aIds[i-1]) == 0){
+    if(dt[aIds[i]][7] == dt[aIds[i-1]][7]){
       aTied[i] = true;
     }
     else{
