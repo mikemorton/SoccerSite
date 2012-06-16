@@ -79,6 +79,7 @@ curgroup = ""
 groupmatches = dict()
 for tr in table.findAll('tr')[1:27]:
     cells = tr.findAll('td')
+
     if len(cells) == 7:
         curgroup = cells[3].text
         if curgroup not in groupmatches:
@@ -88,6 +89,9 @@ for tr in table.findAll('tr')[1:27]:
 
     elif len(cells) == 6:
         groupmatches[curgroup].append((cells[3].text, cells[5].text, cells[4].text))
+    
+    elif len(cells) == 5:
+        groupmatches[curgroup].append((cells[2].text, cells[4].text, cells[3].text))
 
 keys = groupmatches.keys()
 keys.sort()
@@ -158,6 +162,7 @@ for key in keys:
 """ % (key.replace(" ", "_"), key)
     OutputTable(teams)
     for match in groupmatches[key]:
+        
         OutputMatch(match[0], match[1], match[2])
 
     print """
