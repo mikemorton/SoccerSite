@@ -44,6 +44,16 @@ function GetTeamStats(aMatches) {
 	    mTeams[oMatch.awayTeam].AddResult(oMatch.awayScore, oMatch.homeScore);
 	}
     });
+    
+    return aTeams.sort(TeamCompare);
+}
 
-    return aTeams;
+function TeamCompare(oTeam1, oTeam2) {
+    if(oTeam1.nP == oTeam2.nP) {
+	if(oTeam1.nGF == oTeam2.nGF) {
+	    return oTeam2.nGD - oTeam1.nGD;
+	}
+	else return oTeam2.nGF - oTeam1.nGF;
+    }
+    else return oTeam2.nP - oTeam1.nP;
 }
