@@ -54,14 +54,36 @@ test("Basic Group Results Testing", function () {
     aMatches[aMatches.length] = {homeTeam: 'Australia', homeScore: 0, awayTeam: 'Serbia', awayScore: 0};
 
     var aRet = GetTeamStats(aMatches);
-    ok(aRet.length == 4, "4 teams returned");
-    ok(_.uniq(_.pluck(aRet, 'sName')).length == 4, "4 distinct teams returned");
+    equal(aRet.length, 4, "4 teams returned");
+    equal(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
     
     _.each(aRet, function (elem) {
 	equal(elem.nGP, 3, elem.sName + " 3 games played");
 	equal(elem.nP, 3, elem.sName + " 3 points");
 	equal(elem.nW, 0, elem.sName + " 0 wins");
 	equal(elem.nD, 3, elem.sName + " 3 draws");
+	equal(elem.nL, 0, elem.sName + " 0 losses");
+	equal(elem.nGF, 0, elem.sName + " 0 goals scored");
+	equal(elem.nGA, 0, elem.sName + " 0 goals against");
+	equal(elem.nGD, 0, elem.sName + " 0 goal differential");
+    });
+});
+
+test("Imcomplete Match Testing", function () {
+
+    var aMatches = [];
+    aMatches[aMatches.length] = {homeTeam: 'Serbia', homeScore: 55, awayTeam: 'Ghana'};
+    aMatches[aMatches.length] = {homeTeam: 'Germany', awayTeam: 'Australia', awayScore: 47};
+
+    var aRet = GetTeamStats(aMatches);
+    equal(aRet.length, 4, "4 teams returned");
+    equal(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
+    
+    _.each(aRet, function (elem) {
+	equal(elem.nGP, 0, elem.sName + " 0 games played");
+	equal(elem.nP, 0, elem.sName + " 0 points");
+	equal(elem.nW, 0, elem.sName + " 0 wins");
+	equal(elem.nD, 0, elem.sName + " 0 draws");
 	equal(elem.nL, 0, elem.sName + " 0 losses");
 	equal(elem.nGF, 0, elem.sName + " 0 goals scored");
 	equal(elem.nGA, 0, elem.sName + " 0 goals against");
@@ -82,8 +104,8 @@ test("Incomplete Group Results Testing", function () {
     aMatches[aMatches.length] = {homeTeam: 'Australia', awayTeam: 'Serbia' };
     
     var aRet = GetTeamStats(aMatches);
-    ok(aRet.length == 4, "4 teams returned");
-    ok(_.uniq(_.pluck(aRet, 'sName')).length == 4, "4 distinct teams returned");
+    equal(aRet.length, 4, "4 teams returned");
+    equal(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
 
     _.each(aRet, function (elem) {
 	equal(elem.nGP, 1, elem.sName + " 1 games played");
@@ -95,5 +117,4 @@ test("Incomplete Group Results Testing", function () {
 	equal(elem.nGA, 0, elem.sName + " 0 goals against");
 	equal(elem.nGD, 0, elem.sName + " 0 goal differential");
     });
-
 });

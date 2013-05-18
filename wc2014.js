@@ -30,7 +30,7 @@ function Team(name) {
 
 function GetTeamStats(aMatches) {
     // Get list of teams
-    var aTeams = _.map(_.uniq(_.pluck(aMatches, 'homeTeam')), function (name) {
+    var aTeams = _.map(_.uniq(_.union(_.pluck(aMatches, 'homeTeam'), _.pluck(aMatches, 'awayTeam'))), function (name) {
 	return new Team(name);
     });
 
