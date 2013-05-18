@@ -39,8 +39,10 @@ function GetTeamStats(aMatches) {
     }));
 
     _.each(aMatches, function(oMatch) {
-	mTeams[oMatch.homeTeam].AddResult(oMatch.homeScore, oMatch.awayScore);
-	mTeams[oMatch.awayTeam].AddResult(oMatch.awayScore, oMatch.homeScore);
+	if(typeof oMatch.homeScore !== 'undefined' && typeof oMatch.awayScore !== 'undefined') {
+	    mTeams[oMatch.homeTeam].AddResult(oMatch.homeScore, oMatch.awayScore);
+	    mTeams[oMatch.awayTeam].AddResult(oMatch.awayScore, oMatch.homeScore);
+	}
     });
 
     return aTeams;

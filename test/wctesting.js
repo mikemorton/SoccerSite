@@ -68,3 +68,32 @@ test("Basic Group Results Testing", function () {
 	equal(elem.nGD, 0, elem.sName + " 0 goal differential");
     });
 });
+
+test("Incomplete Group Results Testing", function () {
+
+    var aMatches = [];
+    aMatches[aMatches.length] = {homeTeam: 'Serbia', homeScore: 0, awayTeam: 'Ghana', awayScore: 0};
+    aMatches[aMatches.length] = {homeTeam: 'Germany', homeScore: 0, awayTeam: 'Australia', awayScore: 0};
+
+    aMatches[aMatches.length] = {homeTeam: 'Germany', awayTeam: 'Serbia'};
+    aMatches[aMatches.length] = {homeTeam: 'Ghana', awayTeam: 'Australia'};
+
+    aMatches[aMatches.length] = {homeTeam: 'Ghana', awayTeam: 'Germany' };
+    aMatches[aMatches.length] = {homeTeam: 'Australia', awayTeam: 'Serbia' };
+    
+    var aRet = GetTeamStats(aMatches);
+    ok(aRet.length == 4, "4 teams returned");
+    ok(_.uniq(_.pluck(aRet, 'sName')).length == 4, "4 distinct teams returned");
+
+    _.each(aRet, function (elem) {
+	equal(elem.nGP, 1, elem.sName + " 1 games played");
+	equal(elem.nP, 1, elem.sName + " 1 points");
+	equal(elem.nW, 0, elem.sName + " 0 wins");
+	equal(elem.nD, 1, elem.sName + " 1 draws");
+	equal(elem.nL, 0, elem.sName + " 0 losses");
+	equal(elem.nGF, 0, elem.sName + " 0 goals scored");
+	equal(elem.nGA, 0, elem.sName + " 0 goals against");
+	equal(elem.nGD, 0, elem.sName + " 0 goal differential");
+    });
+
+});
