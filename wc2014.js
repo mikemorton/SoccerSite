@@ -28,6 +28,40 @@ function Team(name) {
     }
 }
 
+function GetGroupOrder(aMatches) {
+    var aTeams = GetTeamStats(aMatches).sort(TeamCompare);
+
+    var aTied = [false, false, false];
+    aTied[0] = TeamCompare(aTeams[0], aTeams[1]) == 0;
+    aTied[1] = TeamCompare(aTeams[1], aTeams[2]) == 0;
+    aTied[2] = TeamCompare(aTeams[2], aTeams[3]) == 0;
+
+    if(aTied[0] && aTied[1] && aTied[2]) {
+	// All Four - nothing can be done
+    }
+    else if (aTied[0] && aTied[1])
+    {
+	// First Three
+    }
+    else if (aTied[1] && aTied[2])
+    {
+	// Last Three
+    }
+    else {
+	if(aTied[1]) {
+	    // First Two
+	}
+	if(aTied[2]) {
+	    // Second Two
+	}
+	if(aTied[3]) {
+	    // Last Two
+	}
+    }
+
+    return aTeams;
+}
+
 function GetTeamStats(aMatches) {
     // Get list of teams
     var aTeams = _.map(_.uniq(_.union(_.pluck(aMatches, 'homeTeam'), _.pluck(aMatches, 'awayTeam'))), function (name) {
@@ -45,7 +79,7 @@ function GetTeamStats(aMatches) {
 	}
     });
     
-    return aTeams.sort(TeamCompare);
+    return aTeams;
 }
 
 function TeamCompare(oTeam1, oTeam2) {

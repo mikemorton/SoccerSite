@@ -130,7 +130,7 @@ test("Points Ordering", function() {
     aMatches[aMatches.length] = {homeTeam: 'Ghana', homeScore: 0, awayTeam: 'Germany', awayScore: 1};
     aMatches[aMatches.length] = {homeTeam: 'Australia', homeScore: 1, awayTeam: 'Serbia', awayScore: 0};
 
-    var aRet = GetTeamStats(aMatches);
+    var aRet = GetGroupOrder(aMatches);
     equal(aRet[0].sName, "Australia");
     equal(aRet[1].sName, "Germany");
     equal(aRet[2].sName, "Ghana");
@@ -148,7 +148,7 @@ test("Goals Ordering", function() {
     aMatches[aMatches.length] = {homeTeam: 'Ghana', homeScore: 3, awayTeam: 'Germany', awayScore: 3};
     aMatches[aMatches.length] = {homeTeam: 'Australia', homeScore: 4, awayTeam: 'Serbia', awayScore: 4};
 
-    var aRet = GetTeamStats(aMatches);
+    var aRet = GetGroupOrder(aMatches);
     equal(aRet[0].sName, "Australia");
     equal(aRet[1].sName, "Germany");
     equal(aRet[2].sName, "Ghana");
@@ -166,7 +166,7 @@ test("Goal Differential Ordering", function() {
     aMatches[aMatches.length] = {homeTeam: 'Ghana', homeScore: 0, awayTeam: 'Germany', awayScore: 1};
     aMatches[aMatches.length] = {homeTeam: 'Australia', homeScore: 2, awayTeam: 'Serbia', awayScore: 0};
 
-    var aRet = GetTeamStats(aMatches);
+    var aRet = GetGroupOrder(aMatches);
     equal(aRet[0].sName, "Australia");
     equal(aRet[1].sName, "Germany");
     equal(aRet[2].sName, "Ghana");
