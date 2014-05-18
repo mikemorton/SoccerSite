@@ -11,6 +11,9 @@ function Team(name) {
   this.nGD = 0;
 
   this.AddResult = function (nScored, nAgainst) {
+    nScored = parseInt(nScored);
+    nAgainst = parseInt(nAgainst);
+    
     this.nGP++;
     this.nGF = this.nGF + nScored;
     this.nGA = this.nGA + nAgainst;

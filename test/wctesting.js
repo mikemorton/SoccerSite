@@ -1,15 +1,15 @@
 
 test("Team Object Initialization", function () {
     var elem = new Team('mike');
-    equal(elem.sName, 'mike');
-    equal(elem.nGP, 0, elem.sName + " 0 games played");
-    equal(elem.nP, 0, elem.sName + " 0 points");
-    equal(elem.nW, 0, elem.sName + " 0 wins");
-    equal(elem.nD, 0, elem.sName + " 0 draws");
-    equal(elem.nL, 0, elem.sName + " 0 losses");
-    equal(elem.nGF, 0, elem.sName + " 0 goals scored");
-    equal(elem.nGA, 0, elem.sName + " 0 goals against");
-    equal(elem.nGD, 0, elem.sName + " 0 goal differential");
+    strictEqual(elem.sName, 'mike');
+    strictEqual(elem.nGP, 0, elem.sName + " 0 games played");
+    strictEqual(elem.nP, 0, elem.sName + " 0 points");
+    strictEqual(elem.nW, 0, elem.sName + " 0 wins");
+    strictEqual(elem.nD, 0, elem.sName + " 0 draws");
+    strictEqual(elem.nL, 0, elem.sName + " 0 losses");
+    strictEqual(elem.nGF, 0, elem.sName + " 0 goals scored");
+    strictEqual(elem.nGA, 0, elem.sName + " 0 goals against");
+    strictEqual(elem.nGD, 0, elem.sName + " 0 goal differential");
 });
 
 test("Team.AddResult", function () {
@@ -19,27 +19,41 @@ test("Team.AddResult", function () {
     elem.AddResult(0,0);
     elem.AddResult(0,5);
 
-    equal(elem.nGP, 3, elem.sName + " 3 games played");
-    equal(elem.nP, 4, elem.sName + " 4 points");
-    equal(elem.nW, 1, elem.sName + " 1 wins");
-    equal(elem.nD, 1, elem.sName + " 1 draws");
-    equal(elem.nL, 1, elem.sName + " 1 losses");
-    equal(elem.nGF, 5, elem.sName + " 5 goals scored");
-    equal(elem.nGA, 5, elem.sName + " 5 goals against");
-    equal(elem.nGD, 0, elem.sName + " 0 goal differential");
+    strictEqual(elem.nGP, 3, elem.sName + " 3 games played");
+    strictEqual(elem.nP, 4, elem.sName + " 4 points");
+    strictEqual(elem.nW, 1, elem.sName + " 1 wins");
+    strictEqual(elem.nD, 1, elem.sName + " 1 draws");
+    strictEqual(elem.nL, 1, elem.sName + " 1 losses");
+    strictEqual(elem.nGF, 5, elem.sName + " 5 goals scored");
+    strictEqual(elem.nGA, 5, elem.sName + " 5 goals against");
+    strictEqual(elem.nGD, 0, elem.sName + " 0 goal differential");
 
     elem.AddResult(4,3);
     elem.AddResult(1,1);
     elem.AddResult(0,2);
 
-    equal(elem.nGP, 6, elem.sName + " 6 games played");
-    equal(elem.nP, 8, elem.sName + " 8 points");
-    equal(elem.nW, 2, elem.sName + " 2 wins");
-    equal(elem.nD, 2, elem.sName + " 2 draws");
-    equal(elem.nL, 2, elem.sName + " 2 losses");
-    equal(elem.nGF, 10, elem.sName + " 10 goals scored");
-    equal(elem.nGA, 11, elem.sName + " 11 goals against");
-    equal(elem.nGD, -1, elem.sName + " -1 goal differential");
+    strictEqual(elem.nGP, 6, elem.sName + " 6 games played");
+    strictEqual(elem.nP, 8, elem.sName + " 8 points");
+    strictEqual(elem.nW, 2, elem.sName + " 2 wins");
+    strictEqual(elem.nD, 2, elem.sName + " 2 draws");
+    strictEqual(elem.nL, 2, elem.sName + " 2 losses");
+    strictEqual(elem.nGF, 10, elem.sName + " 10 goals scored");
+    strictEqual(elem.nGA, 11, elem.sName + " 11 goals against");
+    strictEqual(elem.nGD, -1, elem.sName + " -1 goal differential");
+});
+
+test("Team.AddResult correctly handles strings", function () {
+    var elem = new Team('mike');
+
+    elem.AddResult('2','2');
+    strictEqual(elem.nGP, 1, elem.sName + " 1 game played");
+    strictEqual(elem.nP, 1, elem.sName + " 1 point");
+    strictEqual(elem.nW, 0, elem.sName + " 0 wins");
+    strictEqual(elem.nD, 1, elem.sName + " 1 draw");
+    strictEqual(elem.nL, 0, elem.sName + " 0 losses");
+    strictEqual(elem.nGF, 2, elem.sName + " 2 goals scored");
+    strictEqual(elem.nGA, 2, elem.sName + " 2 goals against");
+    strictEqual(elem.nGD, 0, elem.sName + " 0 goal differential");
 });
 
 test("Basic Team Results Testing", function () {
@@ -54,18 +68,18 @@ test("Basic Team Results Testing", function () {
     aMatches[aMatches.length] = {home: 'Australia', homeScore: 0, away: 'Serbia', awayScore: 0};
 
     var aRet = GetTeamStats(aMatches);
-    equal(aRet.length, 4, "4 teams returned");
-    equal(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
+    strictEqual(aRet.length, 4, "4 teams returned");
+    strictEqual(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
 
     _.each(aRet, function (elem) {
-      equal(elem.nGP, 3, elem.sName + " 3 games played");
-      equal(elem.nP, 3, elem.sName + " 3 points");
-      equal(elem.nW, 0, elem.sName + " 0 wins");
-      equal(elem.nD, 3, elem.sName + " 3 draws");
-      equal(elem.nL, 0, elem.sName + " 0 losses");
-      equal(elem.nGF, 0, elem.sName + " 0 goals scored");
-      equal(elem.nGA, 0, elem.sName + " 0 goals against");
-      equal(elem.nGD, 0, elem.sName + " 0 goal differential");
+      strictEqual(elem.nGP, 3, elem.sName + " 3 games played");
+      strictEqual(elem.nP, 3, elem.sName + " 3 points");
+      strictEqual(elem.nW, 0, elem.sName + " 0 wins");
+      strictEqual(elem.nD, 3, elem.sName + " 3 draws");
+      strictEqual(elem.nL, 0, elem.sName + " 0 losses");
+      strictEqual(elem.nGF, 0, elem.sName + " 0 goals scored");
+      strictEqual(elem.nGA, 0, elem.sName + " 0 goals against");
+      strictEqual(elem.nGD, 0, elem.sName + " 0 goal differential");
     });
 });
 
@@ -76,18 +90,18 @@ test("Imcomplete Match Testing", function () {
     aMatches[aMatches.length] = {home: 'Germany', away: 'Australia', awayScore: 47};
 
     var aRet = GetTeamStats(aMatches);
-    equal(aRet.length, 4, "4 teams returned");
-    equal(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
+    strictEqual(aRet.length, 4, "4 teams returned");
+    strictEqual(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
 
     _.each(aRet, function (elem) {
-	equal(elem.nGP, 0, elem.sName + " 0 games played");
-	equal(elem.nP, 0, elem.sName + " 0 points");
-	equal(elem.nW, 0, elem.sName + " 0 wins");
-	equal(elem.nD, 0, elem.sName + " 0 draws");
-	equal(elem.nL, 0, elem.sName + " 0 losses");
-	equal(elem.nGF, 0, elem.sName + " 0 goals scored");
-	equal(elem.nGA, 0, elem.sName + " 0 goals against");
-	equal(elem.nGD, 0, elem.sName + " 0 goal differential");
+      strictEqual(elem.nGP, 0, elem.sName + " 0 games played");
+      strictEqual(elem.nP, 0, elem.sName + " 0 points");
+      strictEqual(elem.nW, 0, elem.sName + " 0 wins");
+      strictEqual(elem.nD, 0, elem.sName + " 0 draws");
+      strictEqual(elem.nL, 0, elem.sName + " 0 losses");
+      strictEqual(elem.nGF, 0, elem.sName + " 0 goals scored");
+      strictEqual(elem.nGA, 0, elem.sName + " 0 goals against");
+      strictEqual(elem.nGD, 0, elem.sName + " 0 goal differential");
     });
 });
 
@@ -104,18 +118,18 @@ test("Incomplete Group Results Testing", function () {
     aMatches[aMatches.length] = {home: 'Australia', away: 'Serbia' };
 
     var aRet = GetTeamStats(aMatches);
-    equal(aRet.length, 4, "4 teams returned");
-    equal(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
+    strictEqual(aRet.length, 4, "4 teams returned");
+    strictEqual(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
 
     _.each(aRet, function (elem) {
-	equal(elem.nGP, 1, elem.sName + " 1 games played");
-	equal(elem.nP, 1, elem.sName + " 1 points");
-	equal(elem.nW, 0, elem.sName + " 0 wins");
-	equal(elem.nD, 1, elem.sName + " 1 draws");
-	equal(elem.nL, 0, elem.sName + " 0 losses");
-	equal(elem.nGF, 0, elem.sName + " 0 goals scored");
-	equal(elem.nGA, 0, elem.sName + " 0 goals against");
-	equal(elem.nGD, 0, elem.sName + " 0 goal differential");
+      strictEqual(elem.nGP, 1, elem.sName + " 1 games played");
+      strictEqual(elem.nP, 1, elem.sName + " 1 points");
+      strictEqual(elem.nW, 0, elem.sName + " 0 wins");
+      strictEqual(elem.nD, 1, elem.sName + " 1 draws");
+      strictEqual(elem.nL, 0, elem.sName + " 0 losses");
+      strictEqual(elem.nGF, 0, elem.sName + " 0 goals scored");
+      strictEqual(elem.nGA, 0, elem.sName + " 0 goals against");
+      strictEqual(elem.nGD, 0, elem.sName + " 0 goal differential");
     });
 });
 
@@ -131,10 +145,10 @@ test("Points Ordering", function() {
     aMatches[aMatches.length] = {home: 'Australia', homeScore: 1, away: 'Serbia', awayScore: 0};
 
     var aRet = GetGroupOrder(aMatches);
-    equal(aRet[0].sName, "Australia");
-    equal(aRet[1].sName, "Germany");
-    equal(aRet[2].sName, "Ghana");
-    equal(aRet[3].sName, "Serbia");
+    strictEqual(aRet[0].sName, "Australia");
+    strictEqual(aRet[1].sName, "Germany");
+    strictEqual(aRet[2].sName, "Ghana");
+    strictEqual(aRet[3].sName, "Serbia");
 });
 
 test("Goals Ordering", function() {
@@ -149,10 +163,10 @@ test("Goals Ordering", function() {
     aMatches[aMatches.length] = {home: 'Australia', homeScore: 4, away: 'Serbia', awayScore: 4};
 
     var aRet = GetGroupOrder(aMatches);
-    equal(aRet[0].sName, "Australia");
-    equal(aRet[1].sName, "Germany");
-    equal(aRet[2].sName, "Ghana");
-    equal(aRet[3].sName, "Serbia");
+    strictEqual(aRet[0].sName, "Australia");
+    strictEqual(aRet[1].sName, "Germany");
+    strictEqual(aRet[2].sName, "Ghana");
+    strictEqual(aRet[3].sName, "Serbia");
 });
 
 test("Goal Differential Ordering", function() {
@@ -167,8 +181,8 @@ test("Goal Differential Ordering", function() {
     aMatches[aMatches.length] = {home: 'Australia', homeScore: 2, away: 'Serbia', awayScore: 0};
 
     var aRet = GetGroupOrder(aMatches);
-    equal(aRet[0].sName, "Australia");
-    equal(aRet[1].sName, "Germany");
-    equal(aRet[2].sName, "Ghana");
-    equal(aRet[3].sName, "Serbia");
+    strictEqual(aRet[0].sName, "Australia");
+    strictEqual(aRet[1].sName, "Germany");
+    strictEqual(aRet[2].sName, "Ghana");
+    strictEqual(aRet[3].sName, "Serbia");
 });
