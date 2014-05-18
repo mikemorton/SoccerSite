@@ -39,46 +39,46 @@ test("Team.AddResult", function () {
     equal(elem.nL, 2, elem.sName + " 2 losses");
     equal(elem.nGF, 10, elem.sName + " 10 goals scored");
     equal(elem.nGA, 11, elem.sName + " 11 goals against");
-    equal(elem.nGD, -1, elem.sName + " -1 goal differential");  
+    equal(elem.nGD, -1, elem.sName + " -1 goal differential");
 });
 
 test("Basic Team Results Testing", function () {
     var aMatches = [];
-    aMatches[aMatches.length] = {homeTeam: 'Serbia', homeScore: 0, awayTeam: 'Ghana', awayScore: 0};
-    aMatches[aMatches.length] = {homeTeam: 'Germany', homeScore: 0, awayTeam: 'Australia', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Serbia', homeScore: 0, away: 'Ghana', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Germany', homeScore: 0, away: 'Australia', awayScore: 0};
 
-    aMatches[aMatches.length] = {homeTeam: 'Germany', homeScore: 0, awayTeam: 'Serbia', awayScore: 0};
-    aMatches[aMatches.length] = {homeTeam: 'Ghana', homeScore: 0, awayTeam: 'Australia', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Germany', homeScore: 0, away: 'Serbia', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Ghana', homeScore: 0, away: 'Australia', awayScore: 0};
 
-    aMatches[aMatches.length] = {homeTeam: 'Ghana', homeScore: 0, awayTeam: 'Germany', awayScore: 0};
-    aMatches[aMatches.length] = {homeTeam: 'Australia', homeScore: 0, awayTeam: 'Serbia', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Ghana', homeScore: 0, away: 'Germany', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Australia', homeScore: 0, away: 'Serbia', awayScore: 0};
 
     var aRet = GetTeamStats(aMatches);
     equal(aRet.length, 4, "4 teams returned");
     equal(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
-    
+
     _.each(aRet, function (elem) {
-	equal(elem.nGP, 3, elem.sName + " 3 games played");
-	equal(elem.nP, 3, elem.sName + " 3 points");
-	equal(elem.nW, 0, elem.sName + " 0 wins");
-	equal(elem.nD, 3, elem.sName + " 3 draws");
-	equal(elem.nL, 0, elem.sName + " 0 losses");
-	equal(elem.nGF, 0, elem.sName + " 0 goals scored");
-	equal(elem.nGA, 0, elem.sName + " 0 goals against");
-	equal(elem.nGD, 0, elem.sName + " 0 goal differential");
+      equal(elem.nGP, 3, elem.sName + " 3 games played");
+      equal(elem.nP, 3, elem.sName + " 3 points");
+      equal(elem.nW, 0, elem.sName + " 0 wins");
+      equal(elem.nD, 3, elem.sName + " 3 draws");
+      equal(elem.nL, 0, elem.sName + " 0 losses");
+      equal(elem.nGF, 0, elem.sName + " 0 goals scored");
+      equal(elem.nGA, 0, elem.sName + " 0 goals against");
+      equal(elem.nGD, 0, elem.sName + " 0 goal differential");
     });
 });
 
 test("Imcomplete Match Testing", function () {
 
     var aMatches = [];
-    aMatches[aMatches.length] = {homeTeam: 'Serbia', homeScore: 55, awayTeam: 'Ghana'};
-    aMatches[aMatches.length] = {homeTeam: 'Germany', awayTeam: 'Australia', awayScore: 47};
+    aMatches[aMatches.length] = {home: 'Serbia', homeScore: 55, away: 'Ghana'};
+    aMatches[aMatches.length] = {home: 'Germany', away: 'Australia', awayScore: 47};
 
     var aRet = GetTeamStats(aMatches);
     equal(aRet.length, 4, "4 teams returned");
     equal(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
-    
+
     _.each(aRet, function (elem) {
 	equal(elem.nGP, 0, elem.sName + " 0 games played");
 	equal(elem.nP, 0, elem.sName + " 0 points");
@@ -94,15 +94,15 @@ test("Imcomplete Match Testing", function () {
 test("Incomplete Group Results Testing", function () {
 
     var aMatches = [];
-    aMatches[aMatches.length] = {homeTeam: 'Serbia', homeScore: 0, awayTeam: 'Ghana', awayScore: 0};
-    aMatches[aMatches.length] = {homeTeam: 'Germany', homeScore: 0, awayTeam: 'Australia', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Serbia', homeScore: 0, away: 'Ghana', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Germany', homeScore: 0, away: 'Australia', awayScore: 0};
 
-    aMatches[aMatches.length] = {homeTeam: 'Germany', awayTeam: 'Serbia'};
-    aMatches[aMatches.length] = {homeTeam: 'Ghana', awayTeam: 'Australia'};
+    aMatches[aMatches.length] = {home: 'Germany', away: 'Serbia'};
+    aMatches[aMatches.length] = {home: 'Ghana', away: 'Australia'};
 
-    aMatches[aMatches.length] = {homeTeam: 'Ghana', awayTeam: 'Germany' };
-    aMatches[aMatches.length] = {homeTeam: 'Australia', awayTeam: 'Serbia' };
-    
+    aMatches[aMatches.length] = {home: 'Ghana', away: 'Germany' };
+    aMatches[aMatches.length] = {home: 'Australia', away: 'Serbia' };
+
     var aRet = GetTeamStats(aMatches);
     equal(aRet.length, 4, "4 teams returned");
     equal(_.uniq(_.pluck(aRet, 'sName')).length, 4, "4 distinct teams returned");
@@ -121,14 +121,14 @@ test("Incomplete Group Results Testing", function () {
 
 test("Points Ordering", function() {
     var aMatches = [];
-    aMatches[aMatches.length] = {homeTeam: 'Serbia', homeScore: 0, awayTeam: 'Ghana', awayScore: 1};
-    aMatches[aMatches.length] = {homeTeam: 'Germany', homeScore: 0, awayTeam: 'Australia', awayScore: 1};
+    aMatches[aMatches.length] = {home: 'Serbia', homeScore: 0, away: 'Ghana', awayScore: 1};
+    aMatches[aMatches.length] = {home: 'Germany', homeScore: 0, away: 'Australia', awayScore: 1};
 
-    aMatches[aMatches.length] = {homeTeam: 'Germany', homeScore: 1, awayTeam: 'Serbia', awayScore: 0};
-    aMatches[aMatches.length] = {homeTeam: 'Ghana', homeScore: 0, awayTeam: 'Australia', awayScore: 1};
+    aMatches[aMatches.length] = {home: 'Germany', homeScore: 1, away: 'Serbia', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Ghana', homeScore: 0, away: 'Australia', awayScore: 1};
 
-    aMatches[aMatches.length] = {homeTeam: 'Ghana', homeScore: 0, awayTeam: 'Germany', awayScore: 1};
-    aMatches[aMatches.length] = {homeTeam: 'Australia', homeScore: 1, awayTeam: 'Serbia', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Ghana', homeScore: 0, away: 'Germany', awayScore: 1};
+    aMatches[aMatches.length] = {home: 'Australia', homeScore: 1, away: 'Serbia', awayScore: 0};
 
     var aRet = GetGroupOrder(aMatches);
     equal(aRet[0].sName, "Australia");
@@ -139,14 +139,14 @@ test("Points Ordering", function() {
 
 test("Goals Ordering", function() {
     var aMatches = [];
-    aMatches[aMatches.length] = {homeTeam: 'Serbia', homeScore: 0, awayTeam: 'Ghana', awayScore: 0};
-    aMatches[aMatches.length] = {homeTeam: 'Germany', homeScore: 4, awayTeam: 'Australia', awayScore: 4};
+    aMatches[aMatches.length] = {home: 'Serbia', homeScore: 0, away: 'Ghana', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Germany', homeScore: 4, away: 'Australia', awayScore: 4};
 
-    aMatches[aMatches.length] = {homeTeam: 'Germany', homeScore: 2, awayTeam: 'Serbia', awayScore: 2};
-    aMatches[aMatches.length] = {homeTeam: 'Ghana', homeScore: 4, awayTeam: 'Australia', awayScore: 4};
+    aMatches[aMatches.length] = {home: 'Germany', homeScore: 2, away: 'Serbia', awayScore: 2};
+    aMatches[aMatches.length] = {home: 'Ghana', homeScore: 4, away: 'Australia', awayScore: 4};
 
-    aMatches[aMatches.length] = {homeTeam: 'Ghana', homeScore: 3, awayTeam: 'Germany', awayScore: 3};
-    aMatches[aMatches.length] = {homeTeam: 'Australia', homeScore: 4, awayTeam: 'Serbia', awayScore: 4};
+    aMatches[aMatches.length] = {home: 'Ghana', homeScore: 3, away: 'Germany', awayScore: 3};
+    aMatches[aMatches.length] = {home: 'Australia', homeScore: 4, away: 'Serbia', awayScore: 4};
 
     var aRet = GetGroupOrder(aMatches);
     equal(aRet[0].sName, "Australia");
@@ -157,14 +157,14 @@ test("Goals Ordering", function() {
 
 test("Goal Differential Ordering", function() {
     var aMatches = [];
-    aMatches[aMatches.length] = {homeTeam: 'Serbia', homeScore: 0, awayTeam: 'Ghana', awayScore: 0};
-    aMatches[aMatches.length] = {homeTeam: 'Germany', homeScore: 0, awayTeam: 'Australia', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Serbia', homeScore: 0, away: 'Ghana', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Germany', homeScore: 0, away: 'Australia', awayScore: 0};
 
-    aMatches[aMatches.length] = {homeTeam: 'Germany', homeScore: 2, awayTeam: 'Serbia', awayScore: 0};
-    aMatches[aMatches.length] = {homeTeam: 'Ghana', homeScore: 0, awayTeam: 'Australia', awayScore: 2};
+    aMatches[aMatches.length] = {home: 'Germany', homeScore: 2, away: 'Serbia', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Ghana', homeScore: 0, away: 'Australia', awayScore: 2};
 
-    aMatches[aMatches.length] = {homeTeam: 'Ghana', homeScore: 0, awayTeam: 'Germany', awayScore: 1};
-    aMatches[aMatches.length] = {homeTeam: 'Australia', homeScore: 2, awayTeam: 'Serbia', awayScore: 0};
+    aMatches[aMatches.length] = {home: 'Ghana', homeScore: 0, away: 'Germany', awayScore: 1};
+    aMatches[aMatches.length] = {home: 'Australia', homeScore: 2, away: 'Serbia', awayScore: 0};
 
     var aRet = GetGroupOrder(aMatches);
     equal(aRet[0].sName, "Australia");
