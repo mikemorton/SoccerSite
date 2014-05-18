@@ -82,7 +82,8 @@ function GetTeamStats(aMatches) {
   }));
 
   _.each(aMatches, function(oMatch) {
-    if(typeof oMatch.homeScore !== 'undefined' && typeof oMatch.awayScore !== 'undefined') {
+    if(typeof oMatch.homeScore !== 'undefined' && typeof oMatch.awayScore !== 'undefined' &&
+        !isNaN(parseInt(oMatch.homeScore)) && !isNaN(parseInt(oMatch.awayScore))) {
       mTeams[oMatch.home].AddResult(oMatch.homeScore, oMatch.awayScore);
       mTeams[oMatch.away].AddResult(oMatch.awayScore, oMatch.homeScore);
     }
