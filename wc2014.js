@@ -13,7 +13,13 @@ function Team(name) {
   this.AddResult = function (nScored, nAgainst) {
     nScored = parseInt(nScored);
     nAgainst = parseInt(nAgainst);
-    
+
+    if(isNaN(nScored))
+      throw "nScored must be a number";
+
+    if(isNaN(nAgainst))
+      throw "nAgainst must be a number";
+
     this.nGP++;
     this.nGF = this.nGF + nScored;
     this.nGA = this.nGA + nAgainst;

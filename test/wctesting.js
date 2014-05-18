@@ -54,6 +54,19 @@ test("Team.AddResult correctly handles strings", function () {
     strictEqual(elem.nGF, 2, elem.sName + " 2 goals scored");
     strictEqual(elem.nGA, 2, elem.sName + " 2 goals against");
     strictEqual(elem.nGD, 0, elem.sName + " 0 goal differential");
+
+    throws(function() {
+      elem.AddResult('2','');
+    });
+
+    throws(function() {
+      elem.AddResult('','2');
+    });
+
+    throws(function() {
+      elem.AddResult('','');
+    });
+
 });
 
 test("Basic Team Results Testing", function () {
