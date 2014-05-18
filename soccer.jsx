@@ -1,29 +1,37 @@
 /** @jsx React.DOM */
 
 var Match = React.createClass({
+  scoreUpdated: function () {
+    this.props.onScoreUpdate(
+      this.props.key,
+      this.refs.awayScore.getDOMNode().value,
+      this.refs.homeScore.getDOMNode().value
+    );
+  },
   render: function() {
 
-    return (<div>{this.props.away} vs. {this.props.home}</div>);
+    return (<div>{this.props.away}
+              <input
+                type="text"
+                size="2"
+                value={this.props.awayScore}
+                ref="awayScore"
+                onChange={this.scoreUpdated}
+              />
+              vs. {this.props.home}
+              <input
+                type="text"
+                size="2"
+                value={this.props.homeScore}
+                ref="homeScore"
+                onChange={this.scoreUpdated}
+               />
+      </div>);
   }
 });
 
 var GroupResultsTable = React.createClass({
   render: function() {
-    var teams = [];
-
-    _.each(this.props.orderedTeams, function(oTeam){
-      teams.push(<tr>
-                  <td>{oTeam.sName}</td>
-                  <td>{oTeam.nGP}</td>
-                  <td>{oTeam.nW}</td>
-                  <td>{oTeam.nD}</td>
-                  <td>{oTeam.nL}</td>
-                  <td>{oTeam.nGF}</td>
-                  <td>{oTeam.nGA}</td>
-                  <td>{oTeam.nGD}</td>
-                  <td>{oTeam.nP}</td>
-                 </tr>);
-    });
 
     return (<table>
               <tr>
@@ -37,26 +45,45 @@ var GroupResultsTable = React.createClass({
                 <th>GD</th>
                 <th>Pts</th>
               </tr>
-              {teams}
+              <tbody>
+                {this.props.orderedTeams.map(function(oTeam) {
+                  return <tr key={oTeam.sName}>
+                          <td>{oTeam.sName}</td>
+                          <td>{oTeam.nGP}</td>
+                          <td>{oTeam.nW}</td>
+                          <td>{oTeam.nD}</td>
+                          <td>{oTeam.nL}</td>
+                          <td>{oTeam.nGF}</td>
+                          <td>{oTeam.nGA}</td>
+                          <td>{oTeam.nGD}</td>
+                          <td>{oTeam.nP}</td>
+                         </tr>
+                })}
+            </tbody>
             </table>);
   }
 });
 
 var Group = React.createClass({
+  handleScoreChange: function (key, awayScore, homeScore) {
+    this.props.onScoreUpdate(key, awayScore, homeScore);
+  },
   render: function() {
-    var matches = [];
-
-    _.each(this.props.matches, function(oMatch) {
-      matches.push(<Match home={oMatch.home} away={oMatch.away} />);
-    });
+    var that = this;
 
     return (<div>
               <h1>Group {this.props.name}</h1>
-              <GroupResultsTable orderedTeams={GetGroupOrder(this.props.matches)}/>
-              {matches}
+              <GroupResultsTable orderedTeams={this.props.orderedTeams}/>
+              {this.props.matches.map(function(oMatch) {
+                return <Match
+                        key={oMatch.hash}
+                        home={oMatch.home}
+                        away={oMatch.away}
+                        onScoreUpdate={that.handleScoreChange}
+                       />
+              })}
             </div>);
   }
-
 });
 
 var KnockoutStage = React.createClass({
@@ -67,11 +94,32 @@ var KnockoutStage = React.createClass({
 });
 
 var WorldCup = React.createClass({
+  getInitialState: function () {
+    return {allMatches:aMatches};
+  },
+  onScoreUpdate: function(matchkey, awayScore, homeScore) {
+    var newArray = this.state.allMatches.slice();
+    var oMatch = _.findWhere(newArray, {hash: matchkey});
+
+    oMatch.awayScore = awayScore;
+    oMatch.homeScore = homeScore;
+
+    this.setState({allMatches:newArray});
+  },
   render: function() {
+    var that = this;
     var groups = [];
-    var oGroups = _.groupBy(this.props.allMatches, 'group');
+    var oGroups = _.groupBy(this.state.allMatches, 'group');
+
     _.map(oGroups, function(matches, groupID) {
-      groups.push(<Group name={groupID} matches={matches} />);
+      var aOrderedTeams = GetGroupOrder(matches);
+      groups.push(<Group
+                    key={groupID}
+                    name={groupID}
+                    matches={matches}
+                    orderedTeams={aOrderedTeams}
+                    onScoreUpdate={that.onScoreUpdate}
+                  />);
     });
 
 
@@ -82,4 +130,4 @@ var WorldCup = React.createClass({
   }
 });
 
-React.renderComponent(<WorldCup allMatches={aMatches}/>, document.getElementById('soccerroot'));
+React.renderComponent(<WorldCup/>, document.getElementById('soccerroot'));
