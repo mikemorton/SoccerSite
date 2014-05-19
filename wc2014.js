@@ -46,25 +46,25 @@ function GetGroupOrder(aMatches) {
     aTied[2] = TeamCompare(aTeams[2], aTeams[3]) === 0;
 
     if(aTied[0] && aTied[1] && aTied[2]) {
-	// All Four - nothing can be done
+      // All Four - nothing can be done
     }
     else if (aTied[0] && aTied[1])
     {
-	// First Three
+
     }
     else if (aTied[1] && aTied[2])
     {
-	// Last Three
+
     }
     else {
       if(aTied[1]) {
-          // First Two
+        // First Two
       }
       if(aTied[2]) {
-          // Second Two
+        // Second Two
       }
       if(aTied[3]) {
-          // Last Two
+        // Last Two
       }
     }
 

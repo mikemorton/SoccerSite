@@ -1,20 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
   <head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="soccer.css" rel="stylesheet">
   	<title>2014 World Cup Results Calculator</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="description" content="Quickly calculate the results of the 2014 World Cup Group Stage and Knock-out Stage." />
     <meta name="keywords" content="World Cup Calculator, World Cup Results Calculator, World Cup Group Stage Calculator, World Cup Tree, 2010 World Cup, World Cup, Cup Calculator" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
   </head>
 
   <body>
 
-    <div id="soccerroot"></div>
+    <div class="container maincontainer">
+      <div id="soccerroot"></div>
+    </div>
 
     <script src="http://fb.me/react-0.10.0.js" type="text/javascript"></script>
     <script src="http://fb.me/JSXTransformer-0.10.0.js" type="text/javascript"></script>
-    <script src="underscore-min.js" type="text/javascript"></script>    
+    <script src="underscore-min.js" type="text/javascript"></script>
     <script src="matchdata.js" type=text/javascript></script>
     <script src="soccer.jsx" type="text/jsx"></script>
     <script src="wc2014.js" type="text/javascript"></script>

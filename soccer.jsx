@@ -10,22 +10,30 @@ var Match = React.createClass({
   },
   render: function() {
 
-    return (<div>{this.props.away}
-              <input
-                type="text"
-                size="2"
-                value={this.props.awayScore}
-                ref="awayScore"
-                onChange={this.scoreUpdated}
-              />
-              vs. {this.props.home}
-              <input
-                type="text"
-                size="2"
-                value={this.props.homeScore}
-                ref="homeScore"
-                onChange={this.scoreUpdated}
-               />
+    return (<div className="row">
+              <div className="col-xs-3">{this.props.away}</div>
+              <div className="col-xs-3">
+                <input
+                  type="text"
+                  size="2"
+                  value={this.props.awayScore}
+                  ref="awayScore"
+                  onChange={this.scoreUpdated}
+                  className="form-control"
+                />
+              </div>
+
+              <div className="col-xs-3">{this.props.home}</div>
+              <div className="col-xs-3">
+                <input
+                  type="text"
+                  size="2"
+                  value={this.props.homeScore}
+                  ref="homeScore"
+                  onChange={this.scoreUpdated}
+                  className="form-control"
+                 />
+              </div>
       </div>);
   }
 });
@@ -33,7 +41,7 @@ var Match = React.createClass({
 var GroupResultsTable = React.createClass({
   render: function() {
 
-    return (<table>
+    return (<table className="table">
               <tr>
                 <th>Team</th>
                 <th>GP</th>
@@ -71,17 +79,19 @@ var Group = React.createClass({
   render: function() {
     var that = this;
 
-    return (<div>
-              <h1>Group {this.props.name}</h1>
+    return (<div className="container groupcontainer">
+              <h2>Group {this.props.name}</h2>
               <GroupResultsTable orderedTeams={this.props.orderedTeams}/>
-              {this.props.matches.map(function(oMatch) {
-                return <Match
-                        key={oMatch.hash}
-                        home={oMatch.home}
-                        away={oMatch.away}
-                        onScoreUpdate={that.handleScoreChange}
-                       />
-              })}
+              <div className="container matchcontainer">
+                {this.props.matches.map(function(oMatch) {
+                  return <Match
+                          key={oMatch.hash}
+                          home={oMatch.home}
+                          away={oMatch.away}
+                          onScoreUpdate={that.handleScoreChange}
+                         />
+                })}
+              </div>
             </div>);
   }
 });
@@ -95,6 +105,7 @@ var KnockoutStage = React.createClass({
 
 var WorldCup = React.createClass({
   getInitialState: function () {
+    // aMatches is a global from matchdata.js
     return {allMatches:aMatches};
   },
   onScoreUpdate: function(matchkey, awayScore, homeScore) {
