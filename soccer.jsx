@@ -85,7 +85,7 @@ var Group = React.createClass({
               <div className="container matchcontainer">
                 {this.props.matches.map(function(oMatch) {
                   return <Match
-                          key={oMatch.hash}
+                          key={oMatch.matchnum}
                           home={oMatch.home}
                           away={oMatch.away}
                           onScoreUpdate={that.handleScoreChange}
@@ -110,7 +110,7 @@ var WorldCup = React.createClass({
   },
   onScoreUpdate: function(matchkey, awayScore, homeScore) {
     var newArray = this.state.allMatches.slice();
-    var oMatch = _.findWhere(newArray, {hash: matchkey});
+    var oMatch = _.findWhere(newArray, {matchnum: matchkey});
 
     oMatch.awayScore = awayScore;
     oMatch.homeScore = homeScore;
