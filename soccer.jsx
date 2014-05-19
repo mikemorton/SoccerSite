@@ -1,5 +1,117 @@
 /** @jsx React.DOM */
 
+var TeamWithFlag = React.createClass({
+  render: function () {
+    var sSrc = 'images/';
+
+    switch(this.props.country){
+    case 'Algeria':
+      sSrc += 'dz.png';
+      break;
+    case 'Argentina':
+      sSrc += 'ar.png';
+      break;
+    case 'Australia':
+      sSrc += 'au.png';
+      break;
+    case 'Belgium':
+      sSrc += 'be.png';
+      break;
+    case 'Bosnia and Herzegovina':
+      sSrc += 'ba.png';
+      break;
+    case 'Brazil':
+      sSrc += 'br.png';
+      break;
+    case 'Cameroon':
+      sSrc += 'cm.png';
+      break;
+    case 'Chile':
+      sSrc += 'cl.png';
+      break;
+    case 'Colombia':
+      sSrc += 'co.png';
+      break;
+    case 'Costa Rica':
+      sSrc += 'cr.png';
+      break;
+    case 'Côte d\'Ivoire':
+      sSrc += 'ci.png';
+      break;
+    case 'Croatia':
+      sSrc += 'hr.png';
+      break;
+    case 'Ecuador':
+      sSrc += 'ec.png';
+      break;
+    case 'England':
+      sSrc += 'england.png';
+      break;
+    case 'France':
+      sSrc += 'fr.png';
+      break;
+    case 'Germany':
+      sSrc += 'de.png';
+      break;
+    case 'Ghana':
+      sSrc += 'gh.png';
+      break;
+    case 'Greece':
+      sSrc += 'gr.png';
+      break;
+    case 'Honduras':
+      sSrc += 'hn.png';
+      break;
+    case 'Iran':
+      sSrc += 'it.png';
+      break;
+    case 'Italy':
+      sSrc += 'it.png';
+      break;
+    case 'Japan':
+      sSrc += 'jp.png';
+      break;
+    case 'Korea Republic':
+      sSrc += 'kr.png';
+      break;
+    case 'Mexico':
+      sSrc += 'mx.png';
+      break;
+    case 'Netherlands':
+      sSrc += 'nl.png';
+      break;
+    case 'Nigeria':
+      sSrc += 'ng.png';
+      break;
+    case 'Portugal':
+      sSrc += 'pt.png';
+      break;
+    case 'Russia':
+      sSrc += 'ru.png';
+      break;
+    case 'Spain':
+      sSrc += 'es.png';
+      break;
+    case 'Switzerland':
+      sSrc += 'ch.png';
+      break;
+    case 'USA':
+      sSrc += 'us.png';
+      break;
+    case 'Uruguay':
+      sSrc += 'uy.png';
+      break;
+    default:
+      break;
+    }
+
+    return (<span>
+              <img src={sSrc} alt={this.props.country} title={this.props.country} />
+              {this.props.country}
+            </span>);
+  }
+});
+
 var Match = React.createClass({
   scoreUpdated: function () {
     this.props.onScoreUpdate(
@@ -11,7 +123,7 @@ var Match = React.createClass({
   render: function() {
 
     return (<div className="row">
-              <div className="col-xs-3">{this.props.away}</div>
+              <div className="col-xs-3"><TeamWithFlag country={this.props.away} /></div>
               <div className="col-xs-3">
                 <input
                   type="text"
@@ -23,7 +135,7 @@ var Match = React.createClass({
                 />
               </div>
 
-              <div className="col-xs-3">{this.props.home}</div>
+              <div className="col-xs-3"><TeamWithFlag country={this.props.home} /></div>
               <div className="col-xs-3">
                 <input
                   type="text"
@@ -56,7 +168,7 @@ var GroupResultsTable = React.createClass({
               <tbody>
                 {this.props.orderedTeams.map(function(oTeam) {
                   return <tr key={oTeam.sName}>
-                          <td>{oTeam.sName}</td>
+                          <td><TeamWithFlag country={oTeam.sName} /></td>
                           <td>{oTeam.nGP}</td>
                           <td>{oTeam.nW}</td>
                           <td>{oTeam.nD}</td>
