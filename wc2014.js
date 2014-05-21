@@ -38,6 +38,7 @@ function Team(name) {
 }
 
 function GetGroupOrder(aMatches) {
+    var aSorted = [];
     var aTeams = GetTeamStats(aMatches).sort(TeamCompare);
 
     var aTied = [false, false, false];
@@ -46,25 +47,56 @@ function GetGroupOrder(aMatches) {
     aTied[2] = TeamCompare(aTeams[2], aTeams[3]) === 0;
 
     if(aTied[0] && aTied[1] && aTied[2]) {
-      // All Four - nothing can be done
+      // Nothing can be done, sort alphabetically
+      aTeams = aTeams.sort(AlphaCompare);
     }
-    else if (aTied[0] && aTied[1])
-    {
+    else if (aTied[0] && aTied[1]) {
+      // Top 3 tied
+      aSorted = GetTeamStats(FilterMatchesForTeams(aMatches,
+        [aTeams[0].sName, aTeams[1].sName, aTeams[2].sName])).sort(TeamCompare);
 
+      aSorted[3] = aTeams[3];
+
+      aTeams = SubTrueStatsForFilteredStats(aSorted, aTeams);
     }
-    else if (aTied[1] && aTied[2])
-    {
+    else if (aTied[1] && aTied[2]) {
+      // Bottom 3 tied
+      aSorted = GetTeamStats(FilterMatchesForTeams(aMatches,
+        [aTeams[1].sName, aTeams[2].sName, aTeams[3].sName])).sort(TeamCompare);
 
+      aSorted.splice(0, 0, aTeams[0]);
+
+      aTeams = SubTrueStatsForFilteredStats(aSorted, aTeams);
     }
     else {
-      if(aTied[1]) {
+      if(aTied[0]) {
         // First Two
+        aSorted = GetTeamStats(FilterMatchesForTeams(aMatches,
+          [aTeams[0].sName, aTeams[1].sName])).sort(TeamCompare);
+
+        aSorted[2] = aTeams[2];
+        aSorted[3] = aTeams[3];
+
+        aTeams = SubTrueStatsForFilteredStats(aSorted, aTeams);
+      }
+      if(aTied[1]) {
+        // Second Two
+        aSorted = GetTeamStats(FilterMatchesForTeams(aMatches,
+          [aTeams[1].sName, aTeams[2].sName])).sort(TeamCompare);
+
+        aSorted.splice(0, 0, aTeams[0]);
+        aSorted[3] = aTeams[3];
+
+        aTeams = SubTrueStatsForFilteredStats(aSorted, aTeams);
       }
       if(aTied[2]) {
-        // Second Two
-      }
-      if(aTied[3]) {
         // Last Two
+        aSorted = GetTeamStats(FilterMatchesForTeams(aMatches,
+          [aTeams[2].sName, aTeams[3].sName])).sort(TeamCompare);
+
+        aSorted.splice(0, 0, aTeams[0], aTeams[1]);
+
+        aTeams = SubTrueStatsForFilteredStats(aSorted, aTeams);
       }
     }
 
@@ -92,6 +124,20 @@ function GetTeamStats(aMatches) {
   return aTeams;
 }
 
+function FilterMatchesForTeams(aMatches, aTeams) {
+  return _.filter(aMatches, function (oMatch) {
+    return _.contains(aTeams, oMatch.home) && _.contains(aTeams, oMatch.away);
+  });
+}
+
+function SubTrueStatsForFilteredStats(aFilteredStats, aTrueStats) {
+
+  return [_.findWhere(aTrueStats, {sName: aFilteredStats[0].sName}),
+          _.findWhere(aTrueStats, {sName: aFilteredStats[1].sName}),
+          _.findWhere(aTrueStats, {sName: aFilteredStats[2].sName}),
+          _.findWhere(aTrueStats, {sName: aFilteredStats[3].sName})];
+}
+
 function TeamCompare(oTeam1, oTeam2) {
   if(oTeam1.nP == oTeam2.nP) {
     if(oTeam1.nGF == oTeam2.nGF) {
@@ -100,4 +146,8 @@ function TeamCompare(oTeam1, oTeam2) {
     else return oTeam2.nGF - oTeam1.nGF;
   }
   else return oTeam2.nP - oTeam1.nP;
+}
+
+function AlphaCompare(oTeam1, oTeam2) {
+  return oTeam1.sName.localeCompare(oTeam2.sName);
 }
