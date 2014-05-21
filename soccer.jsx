@@ -153,7 +153,7 @@ var Match = React.createClass({
 var GroupResultsTable = React.createClass({
   render: function() {
 
-    return (<table className="table">
+    return (<table className="table table-bordered">
               <tr>
                 <th>Team</th>
                 <th>GP</th>
@@ -191,18 +191,20 @@ var Group = React.createClass({
   render: function() {
     var that = this;
 
-    return (<div className="container groupcontainer">
-              <h2>Group {this.props.name}</h2>
-              <GroupResultsTable orderedTeams={this.props.orderedTeams}/>
-              <div className="container matchcontainer">
-                {this.props.matches.map(function(oMatch) {
-                  return <Match
-                          key={oMatch.matchnum}
-                          home={oMatch.home}
-                          away={oMatch.away}
-                          onScoreUpdate={that.handleScoreChange}
-                         />
-                })}
+    return (<div className="panel panel-default groupcontainer">
+              <div className="panel-heading">Group {this.props.name}</div>
+              <div className="panel-body">
+                <GroupResultsTable orderedTeams={this.props.orderedTeams}/>
+                <div className="container matchcontainer">
+                  {this.props.matches.map(function(oMatch) {
+                    return <Match
+                            key={oMatch.matchnum}
+                            home={oMatch.home}
+                            away={oMatch.away}
+                            onScoreUpdate={that.handleScoreChange}
+                           />
+                  })}
+                </div>
               </div>
             </div>);
   }
@@ -210,8 +212,29 @@ var Group = React.createClass({
 
 var KnockoutStage = React.createClass({
   render: function() {
+    var aPairs = [
+      [this.props.firstPlace[0], this.props.secondPlace[1]],
+      [this.props.firstPlace[2], this.props.secondPlace[3]],
+      [this.props.firstPlace[4], this.props.secondPlace[5]],
+      [this.props.firstPlace[6], this.props.secondPlace[7]],
 
-    return (<div><h1>this is the knockout tree</h1></div>);
+      [this.props.firstPlace[1], this.props.secondPlace[0]],
+      [this.props.firstPlace[3], this.props.secondPlace[2]],
+      [this.props.firstPlace[5], this.props.secondPlace[4]],
+      [this.props.firstPlace[7], this.props.secondPlace[6]]
+    ];
+
+    return (<div className="panel panel-default groupcontainer">
+              <div className="panel-heading">Knockout Stage</div>
+              <div className="panel-body">
+                {aPairs.map(function(oPair){
+                  return (<ul>
+                          <li><TeamWithFlag country={oPair[0]} /></li>
+                          <li><TeamWithFlag country={oPair[1]} /></li>
+                         </ul>)
+                })}
+              </div>
+            </div>);
   }
 });
 
@@ -234,8 +257,15 @@ var WorldCup = React.createClass({
     var groups = [];
     var oGroups = _.groupBy(this.state.allMatches, 'group');
 
+    var aGroupWinners = [];
+    var aGroupRunnersUp = [];
+
     _.map(oGroups, function(matches, groupID) {
       var aOrderedTeams = GetGroupOrder(matches);
+
+      aGroupWinners.push(aOrderedTeams[0].sName);
+      aGroupRunnersUp.push(aOrderedTeams[1].sName);
+
       groups.push(<Group
                     key={groupID}
                     name={groupID}
@@ -248,7 +278,7 @@ var WorldCup = React.createClass({
 
     return (<div>
               {groups}
-              <KnockoutStage />
+              <KnockoutStage firstPlace={aGroupWinners} secondPlace={aGroupRunnersUp}/>
             </div>);
   }
 });
