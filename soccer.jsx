@@ -2,6 +2,9 @@
 
 var TeamWithFlag = React.createClass({
   render: function () {
+    if(this.props.country.length==0)
+      return <span />
+
     var sSrc = 'images/';
 
     switch(this.props.country){
@@ -210,9 +213,68 @@ var Group = React.createClass({
   }
 });
 
-var KnockoutStage = React.createClass({
+var KnockoutMatch = React.createClass({
+  topClicked: function() {
+    this.props.winnerClicked(this.props.top, this.props.bottom, this.props.key);
+  },
+  bottomClicked: function() {
+    this.props.winnerClicked(this.props.bottom, this.props.top, this.props.key);
+  },
   render: function() {
-    var aPairs = [
+    return (<ul>
+              <li onClick={this.topClicked} ref="topTeam" ><TeamWithFlag country={this.props.top} /></li>
+              <li onClick={this.bottomClicked} ref="bottomTeam"><TeamWithFlag country={this.props.bottom} /></li>
+            </ul>)
+
+  }
+});
+
+var KnockoutRound = React.createClass({
+  winnerClicked: function(sWinner, sLoser, key){
+    this.props.winnerClicked(sWinner, sLoser, key, this.props.round);
+  },
+  render: function() {
+    var nCount = 0;
+    var that = this;
+    return (<div>
+            {this.props.aMatches.map(function (oPair) {
+              return (<KnockoutMatch
+                        top={oPair[0]}
+                        bottom={oPair[1]}
+                        key={nCount++}
+                        winnerClicked={that.winnerClicked}
+                        />);
+            })}
+            </div>);
+  }
+});
+
+var KnockoutStage = React.createClass({
+  winnerClicked: function(sWinner, sLoser, key, sRound) {
+    var sUpdateRound = '';
+    if(sRound == '16')
+      sUpdateRound = 'qf';
+    else if(sRound == 'qf')
+      sUpdateRound = 'sf';
+    else if(sRound == 'sf')
+      sUpdateRound = 'f';
+
+    var aRound = this.state[sUpdateRound].slice();
+
+    aRound[key%2] = sWinner;
+
+    this.setState({sUpdateRound: aRound});
+  },
+  getInitialState: function () {
+    return {
+      qf:['','','','','','','',''],
+      sf:['','','',''],
+      f:['',''],
+      tp:['','']
+    };
+  },
+  render: function() {
+    var ar16Matches = [
       [this.props.firstPlace[0], this.props.secondPlace[1]],
       [this.props.firstPlace[2], this.props.secondPlace[3]],
       [this.props.firstPlace[4], this.props.secondPlace[5]],
@@ -224,15 +286,29 @@ var KnockoutStage = React.createClass({
       [this.props.firstPlace[7], this.props.secondPlace[6]]
     ];
 
+    var aqfMatches = [
+      [this.state.qf[0],this.state.qf[1]],
+      [this.state.qf[2],this.state.qf[3]],
+      [this.state.qf[4],this.state.qf[5]],
+      [this.state.qf[6],this.state.qf[7]]
+    ];
+
+    var asfMatches = [
+      [this.state.sf[0],this.state.sf[1]],
+      [this.state.sf[2],this.state.sf[3]]
+    ];
+
+    var afMatches = [
+      [this.state.f[0],this.state.f[1]]
+    ];
+
     return (<div className="panel panel-default groupcontainer">
               <div className="panel-heading">Knockout Stage</div>
               <div className="panel-body">
-                {aPairs.map(function(oPair){
-                  return (<ul>
-                          <li><TeamWithFlag country={oPair[0]} /></li>
-                          <li><TeamWithFlag country={oPair[1]} /></li>
-                         </ul>)
-                })}
+                <KnockoutRound aMatches={ar16Matches} round="16" winnerClicked={this.winnerClicked} />
+                <KnockoutRound aMatches={aqfMatches} round="qf" winnerClicked={this.winnerClicked} />
+                <KnockoutRound aMatches={asfMatches} round="sf" winnerClicked={this.winnerClicked} />
+                <KnockoutRound aMatches={afMatches} round="f" />
               </div>
             </div>);
   }
