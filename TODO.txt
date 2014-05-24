@@ -5,3 +5,5 @@
 - Compilation and Minification
 - Swiss Flag is smaller
 - Smaller Inputs
+- Colombia/Ecuador Flag
+- Short names jumping down a line

@@ -6,103 +6,136 @@ var TeamWithFlag = React.createClass({
       return <span />
 
     var sSrc = 'images/';
+    var sShort = '';
 
     switch(this.props.country){
     case 'Algeria':
       sSrc += 'dz.png';
+      sShort = 'DZA';
       break;
     case 'Argentina':
       sSrc += 'ar.png';
+      sShort = 'ARG';
       break;
     case 'Australia':
       sSrc += 'au.png';
+      sShort = 'AUS';
       break;
     case 'Belgium':
       sSrc += 'be.png';
+      sShort = 'BEL';
       break;
     case 'Bosnia and Herzegovina':
       sSrc += 'ba.png';
+      sShort = 'BIH';
       break;
     case 'Brazil':
       sSrc += 'br.png';
+      sShort = 'BRA';
       break;
     case 'Cameroon':
       sSrc += 'cm.png';
+      sShort = 'CMR';
       break;
     case 'Chile':
       sSrc += 'cl.png';
+      sShort = 'CHL';
       break;
     case 'Colombia':
       sSrc += 'co.png';
+      sShort = 'COL';
       break;
     case 'Costa Rica':
       sSrc += 'cr.png';
+      sShort = 'CRI';
       break;
     case 'Côte d\'Ivoire':
       sSrc += 'ci.png';
+      sShort = 'CIV'
       break;
     case 'Croatia':
       sSrc += 'hr.png';
+      sShort = 'HRV';
       break;
     case 'Ecuador':
       sSrc += 'ec.png';
+      sShort = 'ECU';
       break;
     case 'England':
       sSrc += 'england.png';
+      sShort = 'ENG';
       break;
     case 'France':
       sSrc += 'fr.png';
+      sShort = 'FRA';
       break;
     case 'Germany':
       sSrc += 'de.png';
+      sShort = 'DEU';
       break;
     case 'Ghana':
       sSrc += 'gh.png';
+      sShort = 'GHA';
       break;
     case 'Greece':
       sSrc += 'gr.png';
+      sShort = 'GRC';
       break;
     case 'Honduras':
       sSrc += 'hn.png';
+      sShort = 'HND';
       break;
     case 'Iran':
       sSrc += 'it.png';
+      sShort = 'IRN';
       break;
     case 'Italy':
       sSrc += 'it.png';
+      sShort = 'ITA';
       break;
     case 'Japan':
       sSrc += 'jp.png';
+      sShort = 'JPN';
       break;
     case 'Korea Republic':
       sSrc += 'kr.png';
+      sShort = 'KOR';
       break;
     case 'Mexico':
       sSrc += 'mx.png';
+      sShort = 'MEX';
       break;
     case 'Netherlands':
       sSrc += 'nl.png';
+      sShort = 'NLD';
       break;
     case 'Nigeria':
       sSrc += 'ng.png';
+      sShort = 'NGA';
       break;
     case 'Portugal':
       sSrc += 'pt.png';
+      sShort = 'PRT';
       break;
     case 'Russia':
       sSrc += 'ru.png';
+      sShort = 'RUS';
       break;
     case 'Spain':
       sSrc += 'es.png';
+      sShort = 'ESP';
       break;
     case 'Switzerland':
       sSrc += 'ch.png';
+      sShort = 'CHE';
       break;
     case 'USA':
       sSrc += 'us.png';
+      sShort = 'USA';
       break;
     case 'Uruguay':
       sSrc += 'uy.png';
+      sShort = 'URY';
       break;
     default:
       break;
@@ -110,7 +143,8 @@ var TeamWithFlag = React.createClass({
 
     return (<span className="countryWithFlag">
               <img src={sSrc} alt={this.props.country} title={this.props.country} />
-              {this.props.country}
+              <span className="visible-xs">{sShort}</span>
+              <span className="hidden-xs">{this.props.country}</span>
             </span>);
   }
 });
@@ -126,8 +160,8 @@ var Match = React.createClass({
   render: function() {
 
     return (<div className="row">
-              <div className="col-xs-3"><TeamWithFlag country={this.props.away} /></div>
-              <div className="col-xs-3">
+              <div className="col-xs-4"><TeamWithFlag country={this.props.away} /></div>
+              <div className="col-xs-2">
                 <input
                   type="text"
                   size="2"
@@ -138,8 +172,8 @@ var Match = React.createClass({
                 />
               </div>
 
-              <div className="col-xs-3"><TeamWithFlag country={this.props.home} /></div>
-              <div className="col-xs-3">
+              <div className="col-xs-4"><TeamWithFlag country={this.props.home} /></div>
+              <div className="col-xs-2">
                 <input
                   type="text"
                   size="2"
