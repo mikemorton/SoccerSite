@@ -108,7 +108,7 @@ var TeamWithFlag = React.createClass({
       break;
     }
 
-    return (<span>
+    return (<span className="countryWithFlag">
               <img src={sSrc} alt={this.props.country} title={this.props.country} />
               {this.props.country}
             </span>);
@@ -198,7 +198,7 @@ var Group = React.createClass({
               <div className="panel-heading">Group {this.props.name}</div>
               <div className="panel-body">
                 <GroupResultsTable orderedTeams={this.props.orderedTeams}/>
-                <div className="container matchcontainer">
+                <div className="container-fluid matchcontainer">
                   {this.props.matches.map(function(oMatch) {
                     return <Match
                             key={oMatch.matchnum}

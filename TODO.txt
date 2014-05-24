@@ -3,4 +3,5 @@
 - CSS Tidying
 - Knockout Stage Winner
 - Compilation and Minification
-- Country/Flag UI touchup
+- Swiss Flag is smaller
+- Smaller Inputs

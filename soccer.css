@@ -8,5 +8,13 @@
 }
 
 .matchcontainer {
-  max-width: 600px;
+
+}
+
+.countryWithFlag > img {
+  margin-right: 2px;
+}
+
+.countryWithFlag > span {
+  vertical-align: middle;
 }
