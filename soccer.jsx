@@ -345,6 +345,7 @@ var WorldCup = React.createClass({
       aGroupWinners.push(aOrderedTeams[0].sName);
       aGroupRunnersUp.push(aOrderedTeams[1].sName);
 
+      groups.push(<a name={'group' + groupID.toLowerCase()} />)
       groups.push(<Group
                     key={groupID}
                     name={groupID}
@@ -357,6 +358,7 @@ var WorldCup = React.createClass({
 
     return (<div>
               {groups}
+              <a name="knockoutstage" />
               <KnockoutStage firstPlace={aGroupWinners} secondPlace={aGroupRunnersUp}/>
             </div>);
   }

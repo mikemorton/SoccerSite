@@ -1,5 +1,6 @@
 - Numeric hint for mobile
-- Group Navigation
+- Numeric validation
 - CSS Tidying
 - Knockout Stage Winner
 - Compilation and Minification
+- Country/Flag UI touchup
