@@ -261,11 +261,11 @@ var KnockoutStage = React.createClass({
 
     var aRound = this.state[sUpdateRound].slice();
 
-    aRound[key%2] = sWinner;
+    aRound[key] = sWinner;
 
     var oUpdate = {};
     oUpdate[sUpdateRound] = aRound;
-    
+
     this.setState(oUpdate);
   },
   getInitialState: function () {
