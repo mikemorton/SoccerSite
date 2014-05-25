@@ -1,8 +1,15 @@
-- CSS Tidying
-- Knockout Stage Winner
-- Compilation and Minification
-- Swiss Flag is smaller
-- Smaller Inputs - Make big enough on Mobile
-- Colombia/Ecuador Flag
-- Short names jumping down a line
-- IE Testing
+- Code
+  - Knockout Stage Winner
+
+- Dev
+  - Compilation and Minification
+
+- Testing
+  - IE - Also Run unit tests
+
+- CSS
+  - Tidying
+  - Swiss Flag is smaller
+  - Smaller Inputs - Make big enough on Mobile
+  - Colombia/Ecuador Flag
+  - Short names jumping down a line
