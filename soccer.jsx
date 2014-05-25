@@ -472,8 +472,7 @@ var WorldCup = React.createClass({
                     name={groupID}
                     matches={matches}
                     orderedTeams={aOrderedTeams}
-                    onScoreUpdate={that.onScoreUpdate}
-                  />);
+                    onScoreUpdate={that.onScoreUpdate} />);
     });
 
 
