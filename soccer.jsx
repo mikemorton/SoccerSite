@@ -266,7 +266,7 @@ var KnockoutMatch = React.createClass({
     this.props.winnerClicked(this.props.bottom, this.props.top, this.props.key);
   },
   render: function() {
-    return (<ul>
+    return (<ul className="list-unstyled knockoutMatch">
               <li onClick={this.topClicked} ref="topTeam" ><TeamWithFlag country={this.props.top} /></li>
               <li onClick={this.bottomClicked} ref="bottomTeam"><TeamWithFlag country={this.props.bottom} /></li>
             </ul>)
@@ -281,7 +281,7 @@ var KnockoutRound = React.createClass({
   render: function() {
     var nCount = 0;
     var that = this;
-    return (<div>
+    return (<div className="col-xs-3">
             {this.props.aMatches.map(function (oPair) {
               return (<KnockoutMatch
                         top={oPair[0]}
@@ -353,10 +353,12 @@ var KnockoutStage = React.createClass({
     return (<div className="panel panel-default groupcontainer">
               <div className="panel-heading">Knockout Stage</div>
               <div className="panel-body">
-                <KnockoutRound aMatches={ar16Matches} round="16" winnerClicked={this.winnerClicked} />
-                <KnockoutRound aMatches={aqfMatches} round="qf" winnerClicked={this.winnerClicked} />
-                <KnockoutRound aMatches={asfMatches} round="sf" winnerClicked={this.winnerClicked} />
-                <KnockoutRound aMatches={afMatches} round="f" />
+                <div className="container-fluid">
+                  <KnockoutRound aMatches={ar16Matches} round="16" winnerClicked={this.winnerClicked} />
+                  <KnockoutRound aMatches={aqfMatches} round="qf" winnerClicked={this.winnerClicked} />
+                  <KnockoutRound aMatches={asfMatches} round="sf" winnerClicked={this.winnerClicked} />
+                  <KnockoutRound aMatches={afMatches} round="f" />
+                </div>
               </div>
             </div>);
   }
@@ -390,7 +392,7 @@ var WorldCup = React.createClass({
       aGroupWinners.push(aOrderedTeams[0].sName);
       aGroupRunnersUp.push(aOrderedTeams[1].sName);
 
-      groups.push(<a name={'group' + groupID.toLowerCase()} />)
+      groups.push(<a name={'group' + groupID.toLowerCase()} key={'anchor' + groupID}/>)
       groups.push(<Group
                     key={groupID}
                     name={groupID}

@@ -1,5 +1,6 @@
 - Code
   - Knockout Stage Winner
+  - Knockout Stage Clear previously selected winners
 
 - Dev
   - Compilation and Minification
@@ -13,3 +14,4 @@
   - Smaller Inputs - Make big enough on Mobile
   - Colombia/Ecuador Flag
   - Short names jumping down a line
+  - Knockout Stage later rounds need correct height

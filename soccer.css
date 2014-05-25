@@ -18,3 +18,7 @@
 .countryWithFlag > span {
   vertical-align: middle;
 }
+
+.knockoutMatch li:hover{
+  cursor: pointer;
+}
