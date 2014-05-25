@@ -29,3 +29,8 @@
 .countryWithFlag.champion {
   font-weight: bold;
 }
+
+.container-fluid {
+  padding-left: 10px;
+  padding-right: 10px;
+}

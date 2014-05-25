@@ -8,4 +8,3 @@
 
 - CSS
   - Swiss Flag is smaller
-  - Short names jumping down a line (only in knockout now)
