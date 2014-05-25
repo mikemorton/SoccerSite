@@ -169,8 +169,8 @@ var Match = React.createClass({
   render: function() {
 
     return (<div className="row">
-              <div className="col-xs-4"><TeamWithFlag country={this.props.away} /></div>
-              <div className="col-xs-2">
+              <div className="col-xs-3"><TeamWithFlag country={this.props.away} /></div>
+              <div className="col-xs-3">
                 <input
                   type="number"
                   min="0"
@@ -184,8 +184,8 @@ var Match = React.createClass({
                 />
               </div>
 
-              <div className="col-xs-4"><TeamWithFlag country={this.props.home} /></div>
-              <div className="col-xs-2">
+              <div className="col-xs-3"><TeamWithFlag country={this.props.home} /></div>
+              <div className="col-xs-3">
                 <input
                   type="number"
                   min="0"
