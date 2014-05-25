@@ -7,4 +7,3 @@
   - IE - Also Run unit tests
 
 - CSS
-  - Swiss Flag is smaller
