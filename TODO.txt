@@ -8,6 +8,4 @@
 
 - CSS
   - Swiss Flag is smaller
-  - Smaller Inputs - Make big enough on Mobile
-  - Colombia/Ecuador Flag
   - Short names jumping down a line
