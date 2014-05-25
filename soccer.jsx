@@ -325,6 +325,39 @@ var KnockoutStage = React.createClass({
     var oUpdate = {};
     oUpdate[sUpdateRound] = aRound;
 
+    // remove loser from further rounds
+    switch(sUpdateRound) {
+    case 'qf':
+      // remove from semifinal
+      var aSF = this.state.sf.slice();
+
+      if(aSF[0] == sLoser)
+        aSF[0] = '';
+      else if(aSF[1] == sLoser)
+        aSF[1] = '';
+      else if(aSF[2] == sLoser)
+        aSF[2] = '';
+      else if(aSF[3] == sLoser)
+        aSF[3] = '';
+
+      oUpdate['sf'] = aSF;
+
+    case 'sf':
+      // remove from final
+      var aF = this.state.f.slice();
+
+      if(aF[0] == sLoser)
+        aF[0] = '';
+      else if(aF[1] == sLoser)
+        aF[1] = '';
+
+      oUpdate['f'] = aF;
+
+    case 'f':
+      if(this.state.champ == sLoser)
+        oUpdate['champ'] = '';
+    }
+
     this.setState(oUpdate);
   },
   champClicked: function(sWinner, sLoser, key, sRound) {
@@ -339,6 +372,9 @@ var KnockoutStage = React.createClass({
       f:['',''],
       champ: ['']
     };
+  },
+  componentWillReceiveProps: function (nextProps) {
+    this.setState(this.getInitialState());
   },
   render: function() {
     var ar16Matches = [

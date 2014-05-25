@@ -1,5 +1,4 @@
 - Code
-  - Knockout Stage Clear previously selected winners
 
 - Dev
   - Compilation and Minification
