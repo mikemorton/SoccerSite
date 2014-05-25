@@ -1,5 +1,4 @@
 - Code
-  - Knockout Stage Winner
   - Knockout Stage Clear previously selected winners
 
 - Dev
@@ -9,7 +8,6 @@
   - IE - Also Run unit tests
 
 - CSS
-  - Tidying
   - Swiss Flag is smaller
   - Smaller Inputs - Make big enough on Mobile
   - Colombia/Ecuador Flag

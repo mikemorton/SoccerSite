@@ -141,7 +141,11 @@ var TeamWithFlag = React.createClass({
       break;
     }
 
-    return (<span className="countryWithFlag">
+    var sClass = 'countryWithFlag';
+    if(typeof this.props.isChamp !== 'undefined' && this.props.isChamp)
+      sClass += ' champion';
+
+    return (<span className={sClass}>
               <img src={sSrc} alt={this.props.country} title={this.props.country} />
               <span className="visible-xs">{sShort}</span>
               <span className="hidden-xs">{this.props.country}</span>
@@ -266,9 +270,17 @@ var KnockoutMatch = React.createClass({
     this.props.winnerClicked(this.props.bottom, this.props.top, this.props.key);
   },
   render: function() {
+    var aChamp = [false, false];
+    if(typeof this.props.champ !== 'undefined') {
+      if(this.props.top == this.props.champ)
+        aChamp[0] = true;
+      else if(this.props.bottom == this.props.champ)
+        aChamp[1] = true;
+    }
+
     return (<ul className="list-unstyled knockoutMatch">
-              <li onClick={this.topClicked} ref="topTeam" ><TeamWithFlag country={this.props.top} /></li>
-              <li onClick={this.bottomClicked} ref="bottomTeam"><TeamWithFlag country={this.props.bottom} /></li>
+              <li onClick={this.topClicked} ref="topTeam" ><TeamWithFlag country={this.props.top} isChamp={aChamp[0]} /></li>
+              <li onClick={this.bottomClicked} ref="bottomTeam"><TeamWithFlag country={this.props.bottom} isChamp={aChamp[1]} /></li>
             </ul>)
 
   }
@@ -282,12 +294,14 @@ var KnockoutRound = React.createClass({
     var nCount = 0;
     var that = this;
     return (<div className="col-xs-3">
+            <strong>{this.props.title}</strong>
             {this.props.aMatches.map(function (oPair) {
               return (<KnockoutMatch
                         top={oPair[0]}
                         bottom={oPair[1]}
                         key={nCount++}
                         winnerClicked={that.winnerClicked}
+                        champ={that.props.champ}
                         />);
             })}
             </div>);
@@ -313,12 +327,17 @@ var KnockoutStage = React.createClass({
 
     this.setState(oUpdate);
   },
+  champClicked: function(sWinner, sLoser, key, sRound) {
+    this.setState({
+      champ: [sWinner]
+    });
+  },
   getInitialState: function () {
     return {
       qf:['','','','','','','',''],
       sf:['','','',''],
       f:['',''],
-      tp:['','']
+      champ: ['']
     };
   },
   render: function() {
@@ -350,14 +369,33 @@ var KnockoutStage = React.createClass({
       [this.state.f[0],this.state.f[1]]
     ];
 
+    var sChamp = this.state.champ[0];
+
     return (<div className="panel panel-default groupcontainer">
               <div className="panel-heading">Knockout Stage</div>
               <div className="panel-body">
                 <div className="container-fluid">
-                  <KnockoutRound aMatches={ar16Matches} round="16" winnerClicked={this.winnerClicked} />
-                  <KnockoutRound aMatches={aqfMatches} round="qf" winnerClicked={this.winnerClicked} />
-                  <KnockoutRound aMatches={asfMatches} round="sf" winnerClicked={this.winnerClicked} />
-                  <KnockoutRound aMatches={afMatches} round="f" />
+                  <KnockoutRound
+                    title="Round of 16"
+                    aMatches={ar16Matches}
+                    round="16"
+                    winnerClicked={this.winnerClicked} />
+                  <KnockoutRound
+                    title="Quarter-finals"
+                    aMatches={aqfMatches}
+                    round="qf"
+                    winnerClicked={this.winnerClicked} />
+                  <KnockoutRound
+                    title="Semi-finals"
+                    aMatches={asfMatches}
+                    round="sf"
+                    winnerClicked={this.winnerClicked} />
+                  <KnockoutRound
+                    title="Final"
+                    aMatches={afMatches}
+                    round="f"
+                    winnerClicked={this.champClicked}
+                    champ={sChamp}/>
                 </div>
               </div>
             </div>);

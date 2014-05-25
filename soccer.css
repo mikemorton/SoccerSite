@@ -19,6 +19,13 @@
   vertical-align: middle;
 }
 
+.knockoutMatch li {
+  min-height: 21px;
+}
 .knockoutMatch li:hover{
   cursor: pointer;
+}
+
+.countryWithFlag.champion {
+  font-weight: bold;
 }
