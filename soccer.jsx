@@ -147,7 +147,7 @@ var TeamWithFlag = React.createClass({
 
     return (<span className={sClass}>
               <img src={sSrc} alt={this.props.country} title={this.props.country} />
-              <span className="visible-xs">{sShort}</span>
+              <span className="hidden-sm hidden-md hidden-lg">{sShort}</span>
               <span className="hidden-xs">{this.props.country}</span>
             </span>);
   }
@@ -215,7 +215,10 @@ var GroupResultsTable = React.createClass({
                 <th>GF</th>
                 <th>GA</th>
                 <th>GD</th>
-                <th>Pts</th>
+                <th>
+                  <span className="hidden-sm hidden-md hidden-lg">P</span>
+                  <span className="hidden-xs">Pts</span>
+                </th>
               </tr>
               <tbody>
                 {this.props.orderedTeams.map(function(oTeam) {
