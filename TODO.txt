@@ -1,9 +1,8 @@
-- Numeric hint for mobile
-- Numeric validation
 - CSS Tidying
 - Knockout Stage Winner
 - Compilation and Minification
 - Swiss Flag is smaller
-- Smaller Inputs
+- Smaller Inputs - Make big enough on Mobile
 - Colombia/Ecuador Flag
 - Short names jumping down a line
+- IE Testing

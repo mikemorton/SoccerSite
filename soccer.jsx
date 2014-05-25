@@ -157,30 +157,41 @@ var Match = React.createClass({
       this.refs.homeScore.getDOMNode().value
     );
   },
+  keyDown: function (e) {
+    // Don't allow negatives.  Everything else that's invalid will be correctly ignored
+    if(e.keyCode == 189)
+      e.preventDefault();
+  },
   render: function() {
 
     return (<div className="row">
               <div className="col-xs-4"><TeamWithFlag country={this.props.away} /></div>
               <div className="col-xs-2">
                 <input
-                  type="text"
-                  size="2"
+                  type="number"
+                  min="0"
+                  max="99"
+                  maxLength="2"
                   value={this.props.awayScore}
                   ref="awayScore"
                   onChange={this.scoreUpdated}
                   className="form-control"
+                  onKeyDown={this.keyDown}
                 />
               </div>
 
               <div className="col-xs-4"><TeamWithFlag country={this.props.home} /></div>
               <div className="col-xs-2">
                 <input
-                  type="text"
-                  size="2"
+                  type="number"
+                  min="0"
+                  max="99"
+                  maxLength="2"
                   value={this.props.homeScore}
                   ref="homeScore"
                   onChange={this.scoreUpdated}
                   className="form-control"
+                  onKeyDown={this.keyDown}
                  />
               </div>
       </div>);
