@@ -51,7 +51,7 @@ var TeamWithFlag = React.createClass({
       break;
     case 'Côte d\'Ivoire':
       sSrc += 'ci.png';
-      sShort = 'CIV'
+      sShort = 'CIV';
       break;
     case 'Croatia':
       sSrc += 'hr.png';
