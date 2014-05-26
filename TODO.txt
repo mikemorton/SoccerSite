@@ -1,9 +1,9 @@
 - Code
 
 - Dev
-  - Compilation and Minification
 
 - Testing
   - IE - Also Run unit tests
+  - Chrome performance tests
 
 - CSS
